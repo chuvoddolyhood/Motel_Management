@@ -279,7 +279,7 @@ public class ClientForm extends javax.swing.JFrame {
     
     private void setID(){
         String id=null;
-        String ancestors; //Tien to E
+        String ancestors; //Tien to C
         int numberID; //so duoi 00x || 0xx
         
         try{
@@ -324,7 +324,7 @@ public class ClientForm extends javax.swing.JFrame {
         boolean check=true;
         if(txtNameClient.getText().equals("")==true || txtPhoneNumber.getText().equals("")==true 
                 || txtCMND.getText().equals("")==true){
-            JOptionPane.showMessageDialog(rootPane, "Phai nhap day du cac thong tin co ban nhu: Ten, So dien thoai va Loai cong viec");
+            JOptionPane.showMessageDialog(rootPane, "Phai nhap day du cac thong tin co ban nhu: Ten, So dien thoai va CMND");
             check=false;
         }
         return check;

@@ -134,7 +134,7 @@ FROM Contract Co JOIN Room R ON Co.ID_Room=R.ID_Room
 SELECT * 
 FROM Room R JOIN Contract C ON R.ID_Room = C.ID_Room
 
---So luong ID cao nhat
+--So luong ID cao nhat Client
 SELECT MAX(ID_Client) AS MAX_ID FROM Client
 
 --Cap nhat thong tin cho Client
@@ -142,3 +142,11 @@ UPDATE Client SET Name_Client='Tran', CMND='34', Sex='Khac', DOB='2011-02-02',Ho
 
 --Xoa thong tin khach hang
 DELETE Client WHERE ID_Client='C0005' AND Name_Client='Tran';
+
+--set ID cao nhat cua Contract
+SELECT MAX(ID_Contract) AS MAX_ID FROM Contract
+
+--Co PhoneNumber_Client xuat ra Name_Client
+SELECT ID_Client FROM Client WHERE Phone_Number='0939635855';
+
+SELECT * FROM Client
