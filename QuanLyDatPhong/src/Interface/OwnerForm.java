@@ -10,7 +10,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -286,6 +288,11 @@ public class OwnerForm extends javax.swing.JFrame {
         });
 
         btnClear.setText("Làm Mới");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel29Layout = new javax.swing.GroupLayout(jPanel29);
         jPanel29.setLayout(jPanel29Layout);
@@ -293,17 +300,12 @@ public class OwnerForm extends javax.swing.JFrame {
             jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel29Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel29Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel29Layout.createSequentialGroup()
-                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnModify, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnDel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnModify, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
         jPanel29Layout.setVerticalGroup(
             jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,6 +354,11 @@ public class OwnerForm extends javax.swing.JFrame {
 
             }
         ));
+        tblContract.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblContractMouseClicked(evt);
+            }
+        });
         jScrollPane7.setViewportView(tblContract);
 
         jLabel27.setText("Thông tin hợp đồng");
@@ -1471,7 +1478,7 @@ public class OwnerForm extends javax.swing.JFrame {
             while (rs.next()) {
                 ((DefaultTableModel)tblAdd.getModel()).addRow(new Object[]{
                     rs.getString(1), 
-                    rs.getString(2), 
+                    rs.getString(2),
                     rs.getString(3),
                     rs.getString(4),
                     rs.getString(5),
@@ -1520,13 +1527,22 @@ public class OwnerForm extends javax.swing.JFrame {
         return check;
     }
     
+    //Them thong tin nguoi thue vao bang Contract
+    private void addTableContract(String idContract, String idOwner, String idRoom, String dateEnroll){
+        DefaultTableModel m=new DefaultTableModel(new Object[]{"ID Contract", "ID Owner","ID Room", "Date Enroll"}, 0);
+        tblContract.setModel(m);
+        ((DefaultTableModel)tblContract.getModel()).addRow(new Object[]{
+            idContract, idOwner, idRoom, dateEnroll});
+    }
+    
+    //Tao su kien nut Add
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         if(confirmInfoClient()==true){
             String query="INSERT INTO Contract VALUES(?,?,?,?,null,?);";
             String idContract=txtIDContract.getText();
-            String idClient=txtIDOwner.getText();
+            String idOwner=txtIDOwner.getText();
             String idRoom=txtIDRoom.getText();
-            String dob=new SimpleDateFormat("yyyy-MM-dd").format(dcsDateEnroll.getDate());
+            String dateEnroll=new SimpleDateFormat("yyyy-MM-dd").format(dcsDateEnroll.getDate());
             String status = "live";
             
             try {
@@ -1535,28 +1551,74 @@ public class OwnerForm extends javax.swing.JFrame {
                 Connection con=DriverManager.getConnection(dbURL);
                 PreparedStatement ps=con.prepareStatement(query);
                 ps.setString(1, idContract);
-                ps.setString(2, idClient);
+                ps.setString(2, idOwner);
                 ps.setString(3, idRoom);
-                ps.setString(4, dob);
+                ps.setString(4, dateEnroll);
                 ps.setString(5, status);
 
                 ps.executeUpdate();
             }catch(Exception ex){
                 System.out.println(ex);
             }
-            //btnClearActionPerformed(evt);
             
+            addTableContract(idContract, idOwner, idRoom, dateEnroll);
+            loadInfoRoom();
+            btnClearActionPerformed(evt);
         }
     }//GEN-LAST:event_btnAddActionPerformed
 
+    //Cap nhat sua doi Contract
     private void btnModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyActionPerformed
-        
-       
+        String idContract=txtIDContract.getText();
+        String idOwner=txtIDOwner.getText();
+        String idRoom=txtIDRoom.getText();
+        String dateEnroll=new SimpleDateFormat("yyyy-MM-dd").format(dcsDateEnroll.getDate());
+
+        int confirm=JOptionPane.showConfirmDialog(rootPane, "Ban co chac muon chinh sua thong tin khong?","",JOptionPane.YES_NO_OPTION);
+        if(confirm== JOptionPane.YES_OPTION){
+            try {
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
+                String query="UPDATE Contract SET ID_representativeClient=?, ID_Room=?, Date_Enroll=? WHERE ID_Contract=?;";
+                Connection con=DriverManager.getConnection(dbURL);
+                PreparedStatement ps=con.prepareStatement(query);
+
+                ps.setString(1, idOwner);
+                ps.setString(2, idRoom);
+                ps.setString(3, dateEnroll);
+                ps.setString(4, idContract);
+
+                ps.executeUpdate();
+            }catch(Exception ex){
+                System.out.println(ex);
+            }
+            btnClearActionPerformed(evt);
+            addTableContract(idContract, idOwner, idRoom, dateEnroll);
+            loadInfoRoom();
+        }
     }//GEN-LAST:event_btnModifyActionPerformed
 
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
-        
-        
+        String idContract=txtIDContract.getText();
+        int confirm=JOptionPane.showConfirmDialog(rootPane, "Ban co chac muon xoa hop dong"+idContract+" khoi danh sach khong?","",JOptionPane.YES_NO_OPTION);
+        if(confirm== JOptionPane.YES_OPTION){
+            try {
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
+                String query="DELETE Contract WHERE ID_Contract=?;";
+                Connection con=DriverManager.getConnection(dbURL);
+                PreparedStatement ps=con.prepareStatement(query);
+                ps.setString(1, idContract);
+
+                ps.executeUpdate();
+            }catch(Exception ex){
+                System.out.println(ex);
+            }
+            
+            loadInfoRoom();
+            btnClearActionPerformed(evt);
+            //addTableContract(idContract, idOwner, idRoom, dateEnroll);
+        }
     }//GEN-LAST:event_btnDelActionPerformed
 
     private void btnViewContractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewContractActionPerformed
@@ -1844,6 +1906,39 @@ public class OwnerForm extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_txtPhoneNumberOwnerKeyPressed
+
+    
+    Calendar cal=Calendar.getInstance();
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        setIDContract();
+        txtIDRoom.setText("");
+        txtPhoneNumberOwner.setText("");
+        txtIDOwner.setText("");
+        dcsDateEnroll.setDate(cal.getTime());
+//        String oldIDContract=txtIDContract.getText();
+//        int index=tblContract.getSelectedRow();
+//        JOptionPane.showMessageDialog(rootPane, index);
+
+
+        //CO BUG o bang contract
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    //Bam vao bang -> hien thi thong tin ra textview
+    private void tblContractMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblContractMouseClicked
+        int selectedIndex=tblContract.getSelectedRow();
+        txtIDContract.setText(tblContract.getValueAt(selectedIndex, 0)+"");
+        txtIDOwner.setText(tblContract.getValueAt(selectedIndex, 1)+"");
+        txtIDRoom.setText(tblContract.getValueAt(selectedIndex, 2)+"");
+        
+        String getDate=tblContract.getValueAt(selectedIndex, 3).toString();
+        java.util.Date date = null;
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd").parse(getDate);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+        dcsDateEnroll.setDate(date);
+    }//GEN-LAST:event_tblContractMouseClicked
     
     void setButtonCost(boolean check){
         btnPay.setEnabled(!check);

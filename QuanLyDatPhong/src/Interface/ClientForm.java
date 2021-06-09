@@ -12,8 +12,6 @@ import java.sql.ResultSet;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -419,8 +417,6 @@ public class ClientForm extends javax.swing.JFrame {
             btnClearActionPerformed(evt);
             loadInfoClient();
         }
-        
-        
     }//GEN-LAST:event_btnDelActionPerformed
 
     //Bấm vào 1 dòng trong bảng -> xuất thông tin ra các textview
@@ -444,8 +440,6 @@ public class ClientForm extends javax.swing.JFrame {
         txtPhoneNumber.setText(tblClient.getValueAt(selectedIndex, 6)+"");
     }//GEN-LAST:event_tblClientMouseClicked
 
-
-    
     
     /**
      * @param args the command line arguments

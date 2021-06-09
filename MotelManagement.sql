@@ -149,4 +149,43 @@ SELECT MAX(ID_Contract) AS MAX_ID FROM Contract
 --Co PhoneNumber_Client xuat ra Name_Client
 SELECT ID_Client FROM Client WHERE Phone_Number='0939635855';
 
-SELECT * FROM Client
+SELECT * FROM Contract
+DELETE Contract WHERE Date_Enroll='2021-06-09'
+
+SELECT * FROM Bill
+
+--Cap nhat thong tin hop dong
+UPDATE Contract SET ID_representativeClient=?, ID_Room=?, Date_Enroll=? WHERE ID_Contract=?;
+
+--Xoa hop dong
+DELETE Contract WHERE ID_Contract='HD004';
+
+--Nhap ID COntract -> ID Room, Amount
+SELECT R.ID_Room, T.amount_people FROM Room R JOIN Contract C ON R.ID_Room=C.ID_Room JOIN TypeRoom T ON R.ID_Type=T.ID_Type WHERE ID_Contract='HD002'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
