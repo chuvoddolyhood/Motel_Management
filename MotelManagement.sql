@@ -9,7 +9,7 @@ CREATE TABLE Client(
 	Sex VARCHAR(10), 
 	DOB Date,
 	Home_Town VARCHAR(200),
-	Phone_Number VARCHAR(10) NOT NULL
+	Phone_Number VARCHAR(12) NOT NULL
 );
 
 CREATE TABLE TypeRoom(
@@ -62,9 +62,11 @@ CREATE TABLE Account(
 --------------------------------------------------------------------------------------
 ------------------------------Client------------------------------
 SELECT * FROM Client;
-INSERT INTO Client VALUES('C0001','Tran Nhan Duc','092200000295','Nam','Jan 24 1997','Khanh Hoa',0939635855);
-INSERT INTO Client VALUES('C0002','Nguyen Dinh Phuoc','092200000290','Nam','Sep 4 1997','Kien Giang',0839635895);
-INSERT INTO Client VALUES('C0003','Nguyen Thi Nhien','092200000260','Nu','Sep 10 1999','Kien Giang',0839635890);
+
+INSERT INTO Client VALUES('C0001','Tran Nhan Duc','092200000295','Nam','Jan 24 1997','Khanh Hoa','0939635855');
+INSERT INTO Client VALUES('C0002','Nguyen Dinh Phuoc','092200000290','Nam','Sep 4 1997','Kien Giang','0839635895');
+INSERT INTO Client VALUES('C0003','Nguyen Thi Nhien','092200000260','Nu','Sep 10 1999','Kien Giang','0839635890');
+INSERT INTO Client VALUES('C0004','Nguyen Thi Nhien','092200000260','Nu','Sep 10 1999','Kien Giang', '0839635890');
 
 ------------------------------Type Room------------------------------
 SELECT * FROM TypeRoom;
@@ -122,7 +124,21 @@ FROM Room_Info RI JOIN Room R ON RI.ID_Room=R.ID_Room
 SELECT * FROM Room_Info
 SELECT * FROM TypeRoom
 SELECT * FROM Room
+SELECT * FROM Client
 
-SELECT R.ID_Room, R.ID_Type, R.Room_Title, C.Name_Client, Co.status FROM Contract Co JOIN Room R ON Co.ID_Room=R.ID_Room JOIN Client C ON Co.ID_representativeClient=C.ID_Client;
+SELECT R.ID_Room, R.ID_Type, R.Room_Title, C.Name_Client, Co.status 
+FROM Contract Co JOIN Room R ON Co.ID_Room=R.ID_Room 
+				JOIN Client C ON Co.ID_representativeClient=C.ID_Client;
 
 
+SELECT * 
+FROM Room R JOIN Contract C ON R.ID_Room = C.ID_Room
+
+--So luong ID cao nhat
+SELECT MAX(ID_Client) AS MAX_ID FROM Client
+
+--Cap nhat thong tin cho Client
+UPDATE Client SET Name_Client='Tran', CMND='34', Sex='Khac', DOB='2011-02-02',Home_Town='Ha Noi',Phone_Number='324432' WHERE ID_Client='C0005'; 
+
+--Xoa thong tin khach hang
+DELETE Client WHERE ID_Client='C0005' AND Name_Client='Tran';
