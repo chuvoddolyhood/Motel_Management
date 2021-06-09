@@ -5,8 +5,10 @@
  */
 package Interface;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -22,6 +24,10 @@ public class OwnerForm extends javax.swing.JFrame {
      */
     public OwnerForm() {
         initComponents();
+        
+        //Set form in center
+        this.setLocationRelativeTo(null);
+        
         Load();
     }
 
@@ -39,7 +45,7 @@ public class OwnerForm extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbAdd = new javax.swing.JTable();
+        tblAdd = new javax.swing.JTable();
         jPanel24 = new javax.swing.JPanel();
         jLabel45 = new javax.swing.JLabel();
         jLabel46 = new javax.swing.JLabel();
@@ -157,7 +163,7 @@ public class OwnerForm extends javax.swing.JFrame {
 
         jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        tbAdd.setModel(new javax.swing.table.DefaultTableModel(
+        tblAdd.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -176,7 +182,7 @@ public class OwnerForm extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tbAdd);
+        jScrollPane2.setViewportView(tblAdd);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -1305,7 +1311,7 @@ public class OwnerForm extends javax.swing.JFrame {
                         .addComponent(jLabel24)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtElec, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel25)
                         .addGap(18, 18, 18)
                         .addComponent(txtWater, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1398,11 +1404,13 @@ public class OwnerForm extends javax.swing.JFrame {
         txtInterPrice.setText("0");
         txtServicePrice.setText("0");
         
-        LoadtbAdd();
-        LoadtbRoom();
-        LoadtbType();
-        LoadtbAcc();
-        LoadtbCost();
+        loadInfoRoom();
+        
+//        LoadtbAdd();
+//        LoadtbRoom();
+//        LoadtbType();
+//        LoadtbAcc();
+//        LoadtbCost();
     }
     
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -1494,19 +1502,49 @@ public class OwnerForm extends javax.swing.JFrame {
         //Update Status của ID_Room đã trả tiền tháng này
     }//GEN-LAST:event_btnPayActionPerformed
 
+    
+    private void loadInfoRoom(){
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
+            String query="SELECT R.ID_Room, R.ID_Type, R.Room_Title, C.Name_Client, Co.status FROM Contract Co JOIN Room R ON Co.ID_Room=R.ID_Room JOIN Client C ON Co.ID_representativeClient=C.ID_Client;";
+            Connection con=DriverManager.getConnection(dbURL);
+            PreparedStatement ps=con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            DefaultTableModel m=new DefaultTableModel(new Object[]{"ID_Room","Room_Title", "ID_Type", "Owner", "Status"}, 0);
+               tblAdd.setModel(m);
+            while (rs.next()) {
+                ((DefaultTableModel)tblAdd.getModel()).addRow(new Object[]{
+                    rs.getString(1), 
+                    rs.getString(2), 
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                }); 
+            }
+            
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+    }
+    
+    
     void LoadtbAdd(){
-        tbAdd.removeAll();
+        tblAdd.removeAll();
         
         //liệt kê những phòng chưa thanh toán tiền trong tháng
-        String query = "Select ID_Room, Room_Title, ID_Type, Owner, Status where ";
+        String query = "SELECT RI.ID_Room, R.Room_Title, R.ID_Type, CL.Name_Client, C.status\n" +
+                        "FROM Room_Info RI JOIN Room R ON RI.ID_Room=R.ID_Room\n" +
+                        "JOIN Contract C ON RI.ID_Contract = C.ID_Contract\n" +
+                        "JOIN Client CL ON RI.ID_Client = CL.ID_Client";
          
         ResultSet rs = null;
         //rs = ExecuteQuery(query);
         
         try{
-            while(tbAdd.getRowCount() > 0)
+            while(tblAdd.getRowCount() > 0)
             {
-                ((DefaultTableModel)tbAdd.getModel()).removeRow(0);
+                ((DefaultTableModel)tblAdd.getModel()).removeRow(0);
             }
             int columns = rs.getMetaData().getColumnCount();
             while(rs.next())
@@ -1516,7 +1554,7 @@ public class OwnerForm extends javax.swing.JFrame {
                 {
                     row[i - 1] = rs.getObject(i);
                 }
-                ((DefaultTableModel)tbAdd.getModel()).insertRow(rs.getRow() - 1, row);
+                ((DefaultTableModel)tblAdd.getModel()).insertRow(rs.getRow() - 1, row);
             }
         }
         catch(Exception ex)
@@ -1524,6 +1562,8 @@ public class OwnerForm extends javax.swing.JFrame {
             System.out.println(ex);
         }
     }
+    
+    
     void LoadtbConstract(){
         tbConstract.removeAll();
         
@@ -1877,11 +1917,11 @@ public class OwnerForm extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTable tbAcc;
-    private javax.swing.JTable tbAdd;
     private javax.swing.JTable tbConstract;
     private javax.swing.JTable tbCost;
     private javax.swing.JTable tbRoom;
     private javax.swing.JTable tbType;
+    private javax.swing.JTable tblAdd;
     private javax.swing.JTextField txtAddConstract;
     private javax.swing.JTextField txtAddOwner;
     private javax.swing.JTextField txtAddRoomTit;

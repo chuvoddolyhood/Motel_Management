@@ -34,7 +34,6 @@ CREATE TABLE Contract(
 	status VARCHAR(20),
 );
 
-DROP TABLE Contract
 
 CREATE TABLE Bill(
 	ID_Bill VARCHAR(10) NOT NULL PRIMARY KEY,
@@ -49,9 +48,10 @@ CREATE TABLE Bill(
 
 CREATE TABLE Room_Info(
 	ID_Room VARCHAR(10) NOT NULL REFERENCES Room(ID_Room),
-	ID_representativeClient VARCHAR(10) NOT NULL REFERENCES Client(ID_Client),
+	ID_Client VARCHAR(10) NOT NULL REFERENCES Client(ID_Client),
 	ID_Contract VARCHAR(10) NOT NULL REFERENCES Contract(ID_Contract)
 );
+
 
 CREATE TABLE Account(
 	ID_Client VARCHAR(10) NOT NULL REFERENCES Client(ID_Client),
@@ -110,9 +110,19 @@ INSERT INTO Account VALUES('C0002','phuoc','phuoc123');
 INSERT INTO Account VALUES('C0003','nhien','nhien123');
 
 
+-------------------------------------------------------------------------------
+
+SELECT RI.ID_Room, R.Room_Title, R.ID_Type, CL.Name_Client, C.status
+FROM Room_Info RI JOIN Room R ON RI.ID_Room=R.ID_Room
+				JOIN Contract C ON RI.ID_Contract = C.ID_Contract
+				JOIN Client CL ON RI.ID_Client = CL.ID_Client
+				
 
 
+SELECT * FROM Room_Info
+SELECT * FROM TypeRoom
+SELECT * FROM Room
 
-
+SELECT R.ID_Room, R.ID_Type, R.Room_Title, C.Name_Client, Co.status FROM Contract Co JOIN Room R ON Co.ID_Room=R.ID_Room JOIN Client C ON Co.ID_representativeClient=C.ID_Client;
 
 
