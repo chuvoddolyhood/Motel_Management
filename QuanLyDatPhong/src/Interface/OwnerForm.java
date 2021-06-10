@@ -123,6 +123,8 @@ public class OwnerForm extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblBill = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -371,7 +373,7 @@ public class OwnerForm extends javax.swing.JFrame {
                         .addComponent(btnClient)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnRegisterRoomMate, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Đặt Phòng", jPanel1);
@@ -438,7 +440,7 @@ public class OwnerForm extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(40, 40, 40)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(238, Short.MAX_VALUE))
+                .addContainerGap(237, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Hợp Đồng", jPanel2);
@@ -649,7 +651,7 @@ public class OwnerForm extends javax.swing.JFrame {
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addGap(90, 90, 90)
                         .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Tài Khoản", jPanel14);
@@ -885,6 +887,19 @@ public class OwnerForm extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        tblBill.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane4.setViewportView(tblBill);
+
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
@@ -895,24 +910,30 @@ public class OwnerForm extends javax.swing.JFrame {
                     .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(223, 223, 223)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel15)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(302, 302, 302))
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4)
+                .addContainerGap())
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(jLabel15)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(248, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -936,7 +957,9 @@ public class OwnerForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 713, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -951,6 +974,7 @@ public class OwnerForm extends javax.swing.JFrame {
         loadInfoRoom();
         loadTableContractManagement();
         loadTableAccountManagement();
+        loadTableBillManagement();
         
         //Set ID contract
         setIDContract();
@@ -1267,6 +1291,37 @@ public class OwnerForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtPhoneNumberOwnerKeyPressed
 
+//    -----------------------------------------Tab Quan Ly Hop Dong----------------------------------
+    private void loadTableContractManagement(){
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
+            String query="SELECT Co.ID_Contract, Ci.Name_Client, R.ID_Type, R.ID_Room, R.Room_Title, Co.Date_Enroll, Co.Date_End, Co.status \n" +
+                        "FROM Contract Co JOIN Client Ci ON Co.ID_representativeClient=Ci.ID_Client\n" +
+                        "JOIN Room R ON Co.ID_Room=R.ID_Room";
+            Connection con=DriverManager.getConnection(dbURL);
+            PreparedStatement ps=con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            DefaultTableModel m=new DefaultTableModel(new Object[]{"ID Contract","Owner","ID Type","ID Room","Room Title", "Date Enroll", "Date End", "Status"}, 0);
+               tblContract_Management.setModel(m);
+            while (rs.next()) {
+                ((DefaultTableModel)tblContract_Management.getModel()).addRow(new Object[]{
+                    rs.getString(1), 
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getDate(6),
+                    rs.getDate(7),
+                    rs.getString(8)
+                }); 
+            }
+            
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+    }
+    
 //  -----------------------------------------Tab Quan Ly Tai Khoan----------------------------------
     private void loadTableAccountManagement(){
         try{
@@ -1415,31 +1470,32 @@ public class OwnerForm extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_txtIDClient_AccountKeyPressed
-    
-    
-//    -----------------------------------------Tab Quan Ly Hop Dong----------------------------------
-    private void loadTableContractManagement(){
+
+//    -----------------------------------------Tab Quan Ly Phi Sinh Hoat----------------------------------
+    private void loadTableBillManagement(){
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
-            String query="SELECT Co.ID_Contract, Ci.Name_Client, R.ID_Type, R.ID_Room, R.Room_Title, Co.Date_Enroll, Co.Date_End, Co.status \n" +
-                        "FROM Contract Co JOIN Client Ci ON Co.ID_representativeClient=Ci.ID_Client\n" +
-                        "JOIN Room R ON Co.ID_Room=R.ID_Room";
+            String query="SELECT B.ID_Bill, C.ID_Contract, C.ID_Room, C.status, C.Date_Enroll, B.Date_Note, B.Electric, B.Water, B.Internet,B.Money_Room,B.Cost\n" +
+                            "FROM Bill B JOIN Contract C ON B.ID_Contract=C.ID_Contract";
             Connection con=DriverManager.getConnection(dbURL);
             PreparedStatement ps=con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-            DefaultTableModel m=new DefaultTableModel(new Object[]{"ID Contract","Owner","ID Type","ID Room","Room Title", "Date Enroll", "Date End", "Status"}, 0);
-               tblContract_Management.setModel(m);
+            DefaultTableModel m=new DefaultTableModel(new Object[]{"ID Bill","ID Contract","ID Room","Status", "Date Enroll", "Date Note", "Electric","Water","Internet","Money Room","Cost"}, 0);
+               tblBill.setModel(m);
             while (rs.next()) {
-                ((DefaultTableModel)tblContract_Management.getModel()).addRow(new Object[]{
+                ((DefaultTableModel)tblBill.getModel()).addRow(new Object[]{
                     rs.getString(1), 
                     rs.getString(2),
                     rs.getString(3),
                     rs.getString(4),
-                    rs.getString(5),
+                    rs.getDate(5),
                     rs.getDate(6),
-                    rs.getDate(7),
-                    rs.getString(8)
+                    rs.getInt(7),
+                    rs.getInt(8),
+                    rs.getInt(9),
+                    rs.getInt(10),
+                    rs.getInt(11)
                 }); 
             }
             
@@ -1448,9 +1504,8 @@ public class OwnerForm extends javax.swing.JFrame {
         }
     }
     
+    
 
-    
-    
     
     void setButtonCost(boolean check){
         btnPay.setEnabled(!check);
@@ -1705,12 +1760,14 @@ public class OwnerForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable tbCost;
     private javax.swing.JTable tblAccount;
     private javax.swing.JTable tblAdd;
+    private javax.swing.JTable tblBill;
     private javax.swing.JTable tblContract;
     private javax.swing.JTable tblContract_Management;
     private javax.swing.JTextField txtElec;
