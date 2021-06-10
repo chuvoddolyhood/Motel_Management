@@ -176,21 +176,27 @@ SELECT RI.ID_Room, RI.ID_Contract, RI.ID_Client, C.Name_Client FROM Room_Info RI
 SELECT COUNT(*) AS amountOfPeople FROM Room_Info WHERE ID_Contract='HD002'
 
 
+--Hien thi thong tin table Contract
+SELECT Co.ID_Contract, Ci.Name_Client, R.ID_Type, R.ID_Room, R.Room_Title, Co.Date_Enroll, Co.Date_End, Co.status 
+FROM Contract Co JOIN Client Ci ON Co.ID_representativeClient=Ci.ID_Client
+				JOIN Room R ON Co.ID_Room=R.ID_Room
 
-UPDATE Room_Info SET ID_Room='P09', ID_Client='C0002' WHERE ID_Contract='HD009'
-
-
-
-
-
-
-
+--Hien thi thong tin table Account
+SELECT A.ID_Client, C.Name_Client, A.Username, A.Password FROM Account A JOIN Client C ON A.ID_Client=C.ID_Client
 
 
+--Cap nhat tai khoan Account
+UPDATE Account SET Username='nhien', Password='nhien000' WHERE ID_Client='C0003'
 
+--Xoa tai khoan
+DELETE Account WHERE ID_Client='C0003'
 
+SELECT * FROM Account
+SELECT * FROM Client
 
-
+SELECT C.Name_Client
+FROM Client
+WHERE ID_Client='C0003'
 
 
 
