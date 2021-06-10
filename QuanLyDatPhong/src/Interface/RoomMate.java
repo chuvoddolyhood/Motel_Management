@@ -5,11 +5,11 @@
  */
 package Interface;
 
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -143,6 +143,12 @@ public class RoomMate extends javax.swing.JFrame {
         jLabel1.setText("Đăng Ký Thành Viên");
 
         jLabel6.setText("ID Client");
+
+        txtIDClient.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtIDClientKeyPressed(evt);
+            }
+        });
 
         jLabel7.setText("Họ & Tên");
 
@@ -339,7 +345,7 @@ public class RoomMate extends javax.swing.JFrame {
         else JOptionPane.showMessageDialog(rootPane, "Chua nhap ID Contract");
     }//GEN-LAST:event_btnShowActionPerformed
 
-    //Kiem tar so luong nguoi trong phong
+    //Kiem tra so luong nguoi trong phong
     private int checkAmountOfPeople(){
         int amountOfPeople = 0;
         try{
@@ -369,8 +375,8 @@ public class RoomMate extends javax.swing.JFrame {
     }
     
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        if(checkAmountOfPeople()>Integer.valueOf(txtAmountPeople.getText())){
-            if(confirmInfoRoommate()==true){
+        if(confirmInfoRoommate()==true){
+            if(checkAmountOfPeople()<Integer.valueOf(txtAmountPeople.getText())){
                 String query="INSERT INTO Room_Info VALUES (?, ?, ?);";
                 String idRoom=txtIDRoom.getText();
                 String idClient=txtIDClient.getText();
@@ -391,9 +397,31 @@ public class RoomMate extends javax.swing.JFrame {
                 }
                 loadInfoRoommate();
             }
+            else JOptionPane.showMessageDialog(rootPane, "Đã đủ người. Không thể thêm thành viên");
         }
-        else JOptionPane.showMessageDialog(rootPane, "Đã đủ người. Không thể thêm thành viên");
     }//GEN-LAST:event_btnAddActionPerformed
+
+    //Nhập ID_Client -> sinh ra Name Client
+    private void txtIDClientKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDClientKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            try{
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
+                String query="SELECT Name_Client FROM Client WHERE ID_Client=?";
+                Connection con=DriverManager.getConnection(dbURL);
+                PreparedStatement ps=con.prepareStatement(query);
+                ps.setString(1, txtIDClient.getText());
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    txtNameClient.setText(rs.getString("Name_Client"));
+                }
+            }catch(Exception ex){
+                System.out.println(ex);
+            }
+        }
+    }//GEN-LAST:event_txtIDClientKeyPressed
 
     /**
      * @param args the command line arguments

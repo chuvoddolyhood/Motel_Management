@@ -1696,9 +1696,6 @@ public class OwnerForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtPhoneNumberOwnerKeyPressed
     
-
-    
-    
     
     void setButtonCost(boolean check){
         btnPay.setEnabled(!check);
