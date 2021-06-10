@@ -15,7 +15,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *
@@ -67,7 +66,7 @@ public class OwnerForm extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblAdd = new javax.swing.JTable();
         btnClient = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnRegisterRoomMate = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
         tblContract = new javax.swing.JTable();
         jLabel27 = new javax.swing.JLabel();
@@ -341,7 +340,12 @@ public class OwnerForm extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Đăng Ký Thành Viên Trong Phòng");
+        btnRegisterRoomMate.setText("Đăng Ký Thành Viên Trong Phòng");
+        btnRegisterRoomMate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterRoomMateActionPerformed(evt);
+            }
+        });
 
         tblContract.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -381,7 +385,7 @@ public class OwnerForm extends javax.swing.JFrame {
                         .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRegisterRoomMate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnClient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(27, Short.MAX_VALUE))
@@ -407,7 +411,7 @@ public class OwnerForm extends javax.swing.JFrame {
                         .addGap(30, 30, 30)
                         .addComponent(btnClient)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnRegisterRoomMate, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -441,11 +445,6 @@ public class OwnerForm extends javax.swing.JFrame {
         btnViewContract.setMaximumSize(new java.awt.Dimension(101, 25));
         btnViewContract.setMinimumSize(new java.awt.Dimension(101, 25));
         btnViewContract.setPreferredSize(new java.awt.Dimension(101, 25));
-        btnViewContract.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewContractActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -654,33 +653,18 @@ public class OwnerForm extends javax.swing.JFrame {
         btnAddRoom.setMaximumSize(new java.awt.Dimension(73, 25));
         btnAddRoom.setMinimumSize(new java.awt.Dimension(73, 25));
         btnAddRoom.setPreferredSize(new java.awt.Dimension(73, 25));
-        btnAddRoom.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddRoomActionPerformed(evt);
-            }
-        });
 
         btnUpdRoom.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btnUpdRoom.setText("Sửa");
         btnUpdRoom.setMaximumSize(new java.awt.Dimension(73, 25));
         btnUpdRoom.setMinimumSize(new java.awt.Dimension(73, 25));
         btnUpdRoom.setPreferredSize(new java.awt.Dimension(73, 25));
-        btnUpdRoom.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdRoomActionPerformed(evt);
-            }
-        });
 
         btnDelRoom.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btnDelRoom.setText("Xóa");
         btnDelRoom.setMaximumSize(new java.awt.Dimension(73, 25));
         btnDelRoom.setMinimumSize(new java.awt.Dimension(73, 25));
         btnDelRoom.setPreferredSize(new java.awt.Dimension(73, 25));
-        btnDelRoom.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDelRoomActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
         jPanel30.setLayout(jPanel30Layout);
@@ -747,33 +731,18 @@ public class OwnerForm extends javax.swing.JFrame {
         btnAddType.setMaximumSize(new java.awt.Dimension(73, 25));
         btnAddType.setMinimumSize(new java.awt.Dimension(73, 25));
         btnAddType.setPreferredSize(new java.awt.Dimension(73, 25));
-        btnAddType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddTypeActionPerformed(evt);
-            }
-        });
 
         btnUpdType.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btnUpdType.setText("Sửa");
         btnUpdType.setMaximumSize(new java.awt.Dimension(73, 25));
         btnUpdType.setMinimumSize(new java.awt.Dimension(73, 25));
         btnUpdType.setPreferredSize(new java.awt.Dimension(73, 25));
-        btnUpdType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdTypeActionPerformed(evt);
-            }
-        });
 
         btnDelType.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btnDelType.setText("Xóa");
         btnDelType.setMaximumSize(new java.awt.Dimension(73, 25));
         btnDelType.setMinimumSize(new java.awt.Dimension(73, 25));
         btnDelType.setPreferredSize(new java.awt.Dimension(73, 25));
-        btnDelType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDelTypeActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -939,33 +908,18 @@ public class OwnerForm extends javax.swing.JFrame {
         btnAddAcc.setMaximumSize(new java.awt.Dimension(73, 25));
         btnAddAcc.setMinimumSize(new java.awt.Dimension(73, 25));
         btnAddAcc.setPreferredSize(new java.awt.Dimension(73, 25));
-        btnAddAcc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddAccActionPerformed(evt);
-            }
-        });
 
         btnUpdAcc.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btnUpdAcc.setText("Sửa");
         btnUpdAcc.setMaximumSize(new java.awt.Dimension(73, 25));
         btnUpdAcc.setMinimumSize(new java.awt.Dimension(73, 25));
         btnUpdAcc.setPreferredSize(new java.awt.Dimension(73, 25));
-        btnUpdAcc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdAccActionPerformed(evt);
-            }
-        });
 
         btnDelAcc.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btnDelAcc.setText("Xóa");
         btnDelAcc.setMaximumSize(new java.awt.Dimension(73, 25));
         btnDelAcc.setMinimumSize(new java.awt.Dimension(73, 25));
         btnDelAcc.setPreferredSize(new java.awt.Dimension(73, 25));
-        btnDelAcc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDelAccActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -1155,11 +1109,6 @@ public class OwnerForm extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbCost.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbCostMouseClicked(evt);
-            }
-        });
         jScrollPane3.setViewportView(tbCost);
 
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
@@ -1217,30 +1166,15 @@ public class OwnerForm extends javax.swing.JFrame {
         btnPay.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btnPay.setText("Đã thanh toán");
         btnPay.setEnabled(false);
-        btnPay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPayActionPerformed(evt);
-            }
-        });
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel23.setText("Phí sinh hoạt trong tháng");
 
         btnLoadTotal.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btnLoadTotal.setText("Calculate");
-        btnLoadTotal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoadTotalActionPerformed(evt);
-            }
-        });
 
         btnCancelTotal.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btnCancelTotal.setText("Cancel");
-        btnCancelTotal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelTotalActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
@@ -1320,11 +1254,6 @@ public class OwnerForm extends javax.swing.JFrame {
 
         btnWarn.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btnWarn.setText("Nhắc nhở");
-        btnWarn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnWarnActionPerformed(evt);
-            }
-        });
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         jLabel24.setText("Điện:");
@@ -1460,9 +1389,7 @@ public class OwnerForm extends javax.swing.JFrame {
 //        LoadtbType();
 //        LoadtbAcc();
 //        LoadtbCost();
-    }
-    
-    //-----------------------------------------------Tab Đặt Phòng--------------------------------------------------
+    }      
     
     //Show thông tin về phòng trọ hiện tại đã có người lên bảng đầu tiên
     private void loadInfoRoom(){
@@ -1518,56 +1445,77 @@ public class OwnerForm extends javax.swing.JFrame {
         else txtIDContract.setText(ancestors + String.valueOf(numberID+1));
     }
     
-    private boolean confirmInfoClient(){
-        boolean check=true;
-        if(txtPhoneNumberOwner.getText().equals("")==true || txtIDRoom.getText().equals("")==true){
-            JOptionPane.showMessageDialog(rootPane, "Phai nhap day du cac thong tin co ban nhu: Ten, So phong");
-            check=false;
+    //Bam vao bang -> hien thi thong tin ra textview
+    
+    private void tblContractMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblContractMouseClicked
+        int selectedIndex=tblContract.getSelectedRow();
+        txtIDContract.setText(tblContract.getValueAt(selectedIndex, 0)+"");
+        txtIDOwner.setText(tblContract.getValueAt(selectedIndex, 1)+"");
+        txtIDRoom.setText(tblContract.getValueAt(selectedIndex, 2)+"");
+        
+        String getDate=tblContract.getValueAt(selectedIndex, 3).toString();
+        java.util.Date date = null;
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd").parse(getDate);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
         }
-        return check;
+        dcsDateEnroll.setDate(date);
     }
-    
-    //Them thong tin nguoi thue vao bang Contract
-    private void addTableContract(String idContract, String idOwner, String idRoom, String dateEnroll){
-        DefaultTableModel m=new DefaultTableModel(new Object[]{"ID Contract", "ID Owner","ID Room", "Date Enroll"}, 0);
-        tblContract.setModel(m);
-        ((DefaultTableModel)tblContract.getModel()).addRow(new Object[]{
-            idContract, idOwner, idRoom, dateEnroll});
-    }
-    
-    //Tao su kien nut Add
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        if(confirmInfoClient()==true){
-            String query="INSERT INTO Contract VALUES(?,?,?,?,null,?);";
-            String idContract=txtIDContract.getText();
-            String idOwner=txtIDOwner.getText();
-            String idRoom=txtIDRoom.getText();
-            String dateEnroll=new SimpleDateFormat("yyyy-MM-dd").format(dcsDateEnroll.getDate());
-            String status = "live";
-            
+//GEN-LAST:event_tblContractMouseClicked
+
+    //Bấm nút mở đăng ký thành viên cùng phòng
+    private void btnRegisterRoomMateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterRoomMateActionPerformed
+        RoomMate rm = new RoomMate();
+        rm.setVisible(true);
+    }//GEN-LAST:event_btnRegisterRoomMateActionPerformed
+
+    //Bấm nút mở đăng ký người đại diện để đứng đại diện hợp đồng
+    private void btnClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientActionPerformed
+        ClientForm cf = new ClientForm();
+        cf.setVisible(true);
+    }//GEN-LAST:event_btnClientActionPerformed
+
+    //Nút làm mới
+    Calendar cal=Calendar.getInstance();
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        setIDContract();
+        txtIDRoom.setText("");
+        txtPhoneNumberOwner.setText("");
+        txtIDOwner.setText("");
+        dcsDateEnroll.setDate(cal.getTime());
+        
+        tblContract.removeAll();
+        while(tblContract.getRowCount() > 0){
+            ((DefaultTableModel)tblContract.getModel()).removeRow(0);
+        }
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    //Nút xóa
+    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
+        String idContract=txtIDContract.getText();
+        int confirm=JOptionPane.showConfirmDialog(rootPane, "Ban co chac muon xoa hop dong"+idContract+" khoi danh sach khong?","",JOptionPane.YES_NO_OPTION);
+        if(confirm== JOptionPane.YES_OPTION){
             try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
+                String query="DELETE Contract WHERE ID_Contract=?;";
                 Connection con=DriverManager.getConnection(dbURL);
                 PreparedStatement ps=con.prepareStatement(query);
                 ps.setString(1, idContract);
-                ps.setString(2, idOwner);
-                ps.setString(3, idRoom);
-                ps.setString(4, dateEnroll);
-                ps.setString(5, status);
 
                 ps.executeUpdate();
             }catch(Exception ex){
                 System.out.println(ex);
             }
-            
-            addTableContract(idContract, idOwner, idRoom, dateEnroll);
+
             loadInfoRoom();
             btnClearActionPerformed(evt);
+            //addTableContract(idContract, idOwner, idRoom, dateEnroll);
         }
-    }//GEN-LAST:event_btnAddActionPerformed
+    }//GEN-LAST:event_btnDelActionPerformed
 
-    //Cap nhat sua doi Contract
+    //Cap nhat sua doi Contract (Nút sửa)
     private void btnModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyActionPerformed
         String idContract=txtIDContract.getText();
         String idOwner=txtIDOwner.getText();
@@ -1592,300 +1540,95 @@ public class OwnerForm extends javax.swing.JFrame {
             }catch(Exception ex){
                 System.out.println(ex);
             }
-            btnClearActionPerformed(evt);
+            //btnClearActionPerformed(evt);
             addTableContract(idContract, idOwner, idRoom, dateEnroll);
             loadInfoRoom();
         }
     }//GEN-LAST:event_btnModifyActionPerformed
 
-    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
-        String idContract=txtIDContract.getText();
-        int confirm=JOptionPane.showConfirmDialog(rootPane, "Ban co chac muon xoa hop dong"+idContract+" khoi danh sach khong?","",JOptionPane.YES_NO_OPTION);
-        if(confirm== JOptionPane.YES_OPTION){
+    //Kiểm tra thông tin nhập vào
+    private boolean confirmInfoClient(){
+        boolean check=true;
+        if(txtPhoneNumberOwner.getText().equals("")==true || txtIDRoom.getText().equals("")==true){
+            JOptionPane.showMessageDialog(rootPane, "Phai nhap day du cac thong tin co ban nhu: Ten, So phong");
+            check=false;
+        }
+        return check;
+    }
+    
+    //Them thong tin nguoi thue vao bang Contract
+    private void addTableContract(String idContract, String idOwner, String idRoom, String dateEnroll){
+        DefaultTableModel m=new DefaultTableModel(new Object[]{"ID Contract", "ID Owner","ID Room", "Date Enroll"}, 0);
+        tblContract.setModel(m);
+        ((DefaultTableModel)tblContract.getModel()).addRow(new Object[]{
+            idContract, idOwner, idRoom, dateEnroll});
+    }
+    
+    //Them thong tin da nhap vao CSDL Table Contract
+    private void insertIntoContractDTB(){
+        String query="INSERT INTO Contract VALUES(?,?,?,?,null,?);";
+            String idContract=txtIDContract.getText();
+            String idOwner=txtIDOwner.getText();
+            String idRoom=txtIDRoom.getText();
+            String dateEnroll=new SimpleDateFormat("yyyy-MM-dd").format(dcsDateEnroll.getDate());
+            String status = "live";
+            
             try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
-                String query="DELETE Contract WHERE ID_Contract=?;";
                 Connection con=DriverManager.getConnection(dbURL);
                 PreparedStatement ps=con.prepareStatement(query);
                 ps.setString(1, idContract);
+                ps.setString(2, idOwner);
+                ps.setString(3, idRoom);
+                ps.setString(4, dateEnroll);
+                ps.setString(5, status);
 
                 ps.executeUpdate();
             }catch(Exception ex){
                 System.out.println(ex);
             }
+            addTableContract(idContract, idOwner, idRoom, dateEnroll);
+    }
+    
+    //Them thong tin da nhap vao CSDL Table Room_Info
+    private void insertIntoRoomInfoDTB(){
+        String query="INSERT INTO Room_Info VALUES (?,?,?);";
+        String idRoom=txtIDRoom.getText();    
+        String idOwner=txtIDOwner.getText();
+        String idContract=txtIDContract.getText();
             
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
+            Connection con=DriverManager.getConnection(dbURL);
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setString(1, idRoom);
+            ps.setString(2, idOwner);
+            ps.setString(3, idContract);
+
+            ps.executeUpdate();
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+    }
+    
+    //nút Thêm
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        if(confirmInfoClient()==true){
+            //Them thong tin vao bang Contract trong CSDL
+            insertIntoContractDTB();
+
+            //Them Thong Tin vao Bang Room_Info trong CSDL
+            insertIntoRoomInfoDTB();
+
             loadInfoRoom();
-            btnClearActionPerformed(evt);
-            //addTableContract(idContract, idOwner, idRoom, dateEnroll);
+            //btnClearActionPerformed(evt);
         }
-    }//GEN-LAST:event_btnDelActionPerformed
+    }//GEN-LAST:event_btnAddActionPerformed
 
-    private void btnViewContractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewContractActionPerformed
-        
-        LoadtbConstract();
-    }//GEN-LAST:event_btnViewContractActionPerformed
-
-    private void btnAddRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddRoomActionPerformed
-        
-        LoadtbRoom();
-    }//GEN-LAST:event_btnAddRoomActionPerformed
-
-    private void btnUpdRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdRoomActionPerformed
-        
-        LoadtbRoom();
-    }//GEN-LAST:event_btnUpdRoomActionPerformed
-
-    private void btnDelRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelRoomActionPerformed
-        
-        LoadtbRoom();
-    }//GEN-LAST:event_btnDelRoomActionPerformed
-
-    private void btnAddTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTypeActionPerformed
-        
-        LoadtbType();
-    }//GEN-LAST:event_btnAddTypeActionPerformed
-
-    private void btnUpdTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdTypeActionPerformed
-        
-        LoadtbType();
-    }//GEN-LAST:event_btnUpdTypeActionPerformed
-
-    private void btnDelTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelTypeActionPerformed
-        
-        LoadtbType();
-    }//GEN-LAST:event_btnDelTypeActionPerformed
-
-    private void btnAddAccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddAccActionPerformed
-        
-        LoadtbAcc();
-    }//GEN-LAST:event_btnAddAccActionPerformed
-
-    private void btnUpdAccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdAccActionPerformed
-        
-        LoadtbAcc();
-    }//GEN-LAST:event_btnUpdAccActionPerformed
-
-    private void btnDelAccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelAccActionPerformed
-        
-        LoadtbAcc();
-    }//GEN-LAST:event_btnDelAccActionPerformed
-
-    private void btnWarnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWarnActionPerformed
-        
-        //Mở cổng vs server chat
-    }//GEN-LAST:event_btnWarnActionPerformed
-
-    private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
-        
-        //Update Status của ID_Room đã trả tiền tháng này
-    }//GEN-LAST:event_btnPayActionPerformed
-
-   
-    
-    void LoadtbConstract(){
-        tbConstract.removeAll();
-        
-        //liệt kê những phòng chưa thanh toán tiền trong tháng
-        String query = "Select ID_Room, Room_Title, ID_Type, Owner, Status where ";
-         
-        ResultSet rs = null;
-        //rs = ExecuteQuery(query);
-        
-        try{
-            while(tbConstract.getRowCount() > 0)
-            {
-                ((DefaultTableModel)tbConstract.getModel()).removeRow(0);
-            }
-            int columns = rs.getMetaData().getColumnCount();
-            while(rs.next())
-            {
-                Object[] row = new Object[columns];
-                for(int i = 1; i <= columns; i++)
-                {
-                    row[i - 1] = rs.getObject(i);
-                }
-                ((DefaultTableModel)tbConstract.getModel()).insertRow(rs.getRow() - 1, row);
-            }
-        }
-        catch(Exception ex)
-        {
-            System.out.println(ex);
-        }
-    }
-    void LoadtbRoom(){
-        tbRoom.removeAll();
-                
-        //liệt kê những phòng chưa thanh toán tiền trong tháng
-        String query = "Select ID_Room, Room_Title, ID_Type, Owner, Status where ";
-         
-        ResultSet rs = null;
-        //rs = ExecuteQuery(query);
-        
-        try{
-            while(tbRoom.getRowCount() > 0)
-            {
-                ((DefaultTableModel)tbRoom.getModel()).removeRow(0);
-            }
-            int columns = rs.getMetaData().getColumnCount();
-            while(rs.next())
-            {
-                Object[] row = new Object[columns];
-                for(int i = 1; i <= columns; i++)
-                {
-                    row[i - 1] = rs.getObject(i);
-                }
-                ((DefaultTableModel)tbRoom.getModel()).insertRow(rs.getRow() - 1, row);
-            }
-        }
-        catch(Exception ex)
-        {
-            System.out.println(ex);
-        }
-    }
-    void LoadtbType(){
-        tbType.removeAll();
-                
-        //liệt kê những phòng chưa thanh toán tiền trong tháng
-        String query = "Select ID_Room, Room_Title, ID_Type, Owner, Status where ";
-         
-        ResultSet rs = null;
-        //rs = ExecuteQuery(query);
-        
-        try{
-            while(tbType.getRowCount() > 0)
-            {
-                ((DefaultTableModel)tbType.getModel()).removeRow(0);
-            }
-            int columns = rs.getMetaData().getColumnCount();
-            while(rs.next())
-            {
-                Object[] row = new Object[columns];
-                for(int i = 1; i <= columns; i++)
-                {
-                    row[i - 1] = rs.getObject(i);
-                }
-                ((DefaultTableModel)tbType.getModel()).insertRow(rs.getRow() - 1, row);
-            }
-        }
-        catch(Exception ex)
-        {
-            System.out.println(ex);
-        }
-    }
-    void LoadtbAcc(){
-        tbAcc.removeAll();
-                
-        //liệt kê những phòng chưa thanh toán tiền trong tháng
-        String query = "Select ID_Room, Room_Title, ID_Type, Owner, Status where ";
-         
-        ResultSet rs = null;
-        //rs = ExecuteQuery(query);
-        
-        try{
-            while(tbAcc.getRowCount() > 0)
-            {
-                ((DefaultTableModel)tbAcc.getModel()).removeRow(0);
-            }
-            int columns = rs.getMetaData().getColumnCount();
-            while(rs.next())
-            {
-                Object[] row = new Object[columns];
-                for(int i = 1; i <= columns; i++)
-                {
-                    row[i - 1] = rs.getObject(i);
-                }
-                ((DefaultTableModel)tbAcc.getModel()).insertRow(rs.getRow() - 1, row);
-            }
-        }
-        catch(Exception ex)
-        {
-            System.out.println(ex);
-        }
-    }
-    void LoadtbCost(){
-        tbCost.removeAll();
-                
-        //liệt kê những phòng chưa thanh toán tiền trong tháng
-        String query = "Select ID_Room, Room_Title, ID_Type, Owner, Status where ";
-         
-        ResultSet rs = null;
-        //rs = ExecuteQuery(query);
-        
-        try{
-            while(tbCost.getRowCount() > 0)
-            {
-                ((DefaultTableModel)tbCost.getModel()).removeRow(0);
-            }
-            int columns = rs.getMetaData().getColumnCount();
-            while(rs.next())
-            {
-                Object[] row = new Object[columns];
-                for(int i = 1; i <= columns; i++)
-                {
-                    row[i - 1] = rs.getObject(i);
-                }
-                ((DefaultTableModel)tbCost.getModel()).insertRow(rs.getRow() - 1, row);
-            }
-        }
-        catch(Exception ex)
-        {
-            System.out.println(ex);
-        }
-    }
-    
-    private void btnLoadTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadTotalActionPerformed
-        boolean check=false;
-        int ElecPrice = Integer.valueOf(txtElec.getText()) * 3000;
-        int WaterPrice = Integer.valueOf(txtWater.getText()) * 7000;
-        int InterPrice = Integer.valueOf(txtInterPrice.getText());
-        int ServicePrice = Integer.valueOf(txtServicePrice.getText());
-        double Total;
-        
-        txtElecPrice.setText(String.valueOf(ElecPrice));
-        txtWaterPrice.setText(String.valueOf(WaterPrice));
-        
-        if(ElecPrice<=0)
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập số điện > 0");
-        else if(WaterPrice<=0)
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập số nước > 0");
-        else if(InterPrice<0)
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập tiền mạng > 0, 0 nếu không sử dụng mạng");
-        else if(ServicePrice<0)
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập tiền dịch vụ > 0, 0 nếu không sử dụng dịch vụ");
-        else{
-            Total = ElecPrice + WaterPrice + InterPrice + ServicePrice;
-            txtTotal.setText(String.valueOf(Total)+"VNĐ");
-            btnPay.setEnabled(!check);
-            txtElecPrice.setEnabled(check);
-            txtWaterPrice.setEnabled(check);
-            txtInterPrice.setEnabled(check);
-            txtServicePrice.setEnabled(check);
-            txtElec.setEnabled(check);
-            txtWater.setEnabled(check);
-            
-            LoadtbCost();
-        }
-    }//GEN-LAST:event_btnLoadTotalActionPerformed
-    public int ID_Room;
-    private void tbCostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCostMouseClicked
-        int Row = tbCost.getSelectedRow();
-        TableModel model = tbCost.getModel();
-        
-        ID_Room = Integer.valueOf(String.valueOf(model.getValueAt(Row, 0)));
-    }//GEN-LAST:event_tbCostMouseClicked
-
-    private void btnCancelTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelTotalActionPerformed
-        setButtonCost(true);
-    }//GEN-LAST:event_btnCancelTotalActionPerformed
-
-    private void btnClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientActionPerformed
-        ClientForm cf = new ClientForm();
-        cf.setVisible(true);
-    }//GEN-LAST:event_btnClientActionPerformed
-
-    
-    //Cua Tab Dang Ky
+    //Sau khi nhập sdt, bấm phím Enter -> sinh ID_Client đã đăng ký
     private void txtPhoneNumberOwnerKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneNumberOwnerKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
         {
@@ -1906,39 +1649,10 @@ public class OwnerForm extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_txtPhoneNumberOwnerKeyPressed
+    
 
     
-    Calendar cal=Calendar.getInstance();
-    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        setIDContract();
-        txtIDRoom.setText("");
-        txtPhoneNumberOwner.setText("");
-        txtIDOwner.setText("");
-        dcsDateEnroll.setDate(cal.getTime());
-//        String oldIDContract=txtIDContract.getText();
-//        int index=tblContract.getSelectedRow();
-//        JOptionPane.showMessageDialog(rootPane, index);
-
-
-        //CO BUG o bang contract
-    }//GEN-LAST:event_btnClearActionPerformed
-
-    //Bam vao bang -> hien thi thong tin ra textview
-    private void tblContractMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblContractMouseClicked
-        int selectedIndex=tblContract.getSelectedRow();
-        txtIDContract.setText(tblContract.getValueAt(selectedIndex, 0)+"");
-        txtIDOwner.setText(tblContract.getValueAt(selectedIndex, 1)+"");
-        txtIDRoom.setText(tblContract.getValueAt(selectedIndex, 2)+"");
-        
-        String getDate=tblContract.getValueAt(selectedIndex, 3).toString();
-        java.util.Date date = null;
-        try {
-            date = new SimpleDateFormat("yyyy-MM-dd").parse(getDate);
-        } catch (ParseException ex) {
-            ex.printStackTrace();
-        }
-        dcsDateEnroll.setDate(date);
-    }//GEN-LAST:event_tblContractMouseClicked
+    
     
     void setButtonCost(boolean check){
         btnPay.setEnabled(!check);
@@ -1949,7 +1663,160 @@ public class OwnerForm extends javax.swing.JFrame {
         txtElec.setEnabled(check);
         txtWater.setEnabled(check);
     }
-            
+    
+    
+    //    void LoadtbConstract(){
+//        tbConstract.removeAll();
+//        
+//        //liệt kê những phòng chưa thanh toán tiền trong tháng
+//        String query = "Select ID_Room, Room_Title, ID_Type, Owner, Status where ";
+//         
+//        ResultSet rs = null;
+//        //rs = ExecuteQuery(query);
+//        
+//        try{
+//            while(tbConstract.getRowCount() > 0)
+//            {
+//                ((DefaultTableModel)tbConstract.getModel()).removeRow(0);
+//            }
+//            int columns = rs.getMetaData().getColumnCount();
+//            while(rs.next())
+//            {
+//                Object[] row = new Object[columns];
+//                for(int i = 1; i <= columns; i++)
+//                {
+//                    row[i - 1] = rs.getObject(i);
+//                }
+//                ((DefaultTableModel)tbConstract.getModel()).insertRow(rs.getRow() - 1, row);
+//            }
+//        }
+//        catch(Exception ex)
+//        {
+//            System.out.println(ex);
+//        }
+//    }
+//    void LoadtbRoom(){
+//        tbRoom.removeAll();
+//                
+//        //liệt kê những phòng chưa thanh toán tiền trong tháng
+//        String query = "Select ID_Room, Room_Title, ID_Type, Owner, Status where ";
+//         
+//        ResultSet rs = null;
+//        //rs = ExecuteQuery(query);
+//        
+//        try{
+//            while(tbRoom.getRowCount() > 0)
+//            {
+//                ((DefaultTableModel)tbRoom.getModel()).removeRow(0);
+//            }
+//            int columns = rs.getMetaData().getColumnCount();
+//            while(rs.next())
+//            {
+//                Object[] row = new Object[columns];
+//                for(int i = 1; i <= columns; i++)
+//                {
+//                    row[i - 1] = rs.getObject(i);
+//                }
+//                ((DefaultTableModel)tbRoom.getModel()).insertRow(rs.getRow() - 1, row);
+//            }
+//        }
+//        catch(Exception ex)
+//        {
+//            System.out.println(ex);
+//        }
+//    }
+//    void LoadtbType(){
+//        tbType.removeAll();
+//                
+//        //liệt kê những phòng chưa thanh toán tiền trong tháng
+//        String query = "Select ID_Room, Room_Title, ID_Type, Owner, Status where ";
+//         
+//        ResultSet rs = null;
+//        //rs = ExecuteQuery(query);
+//        
+//        try{
+//            while(tbType.getRowCount() > 0)
+//            {
+//                ((DefaultTableModel)tbType.getModel()).removeRow(0);
+//            }
+//            int columns = rs.getMetaData().getColumnCount();
+//            while(rs.next())
+//            {
+//                Object[] row = new Object[columns];
+//                for(int i = 1; i <= columns; i++)
+//                {
+//                    row[i - 1] = rs.getObject(i);
+//                }
+//                ((DefaultTableModel)tbType.getModel()).insertRow(rs.getRow() - 1, row);
+//            }
+//        }
+//        catch(Exception ex)
+//        {
+//            System.out.println(ex);
+//        }
+//    }
+//    void LoadtbAcc(){
+//        tbAcc.removeAll();
+//                
+//        //liệt kê những phòng chưa thanh toán tiền trong tháng
+//        String query = "Select ID_Room, Room_Title, ID_Type, Owner, Status where ";
+//         
+//        ResultSet rs = null;
+//        //rs = ExecuteQuery(query);
+//        
+//        try{
+//            while(tbAcc.getRowCount() > 0)
+//            {
+//                ((DefaultTableModel)tbAcc.getModel()).removeRow(0);
+//            }
+//            int columns = rs.getMetaData().getColumnCount();
+//            while(rs.next())
+//            {
+//                Object[] row = new Object[columns];
+//                for(int i = 1; i <= columns; i++)
+//                {
+//                    row[i - 1] = rs.getObject(i);
+//                }
+//                ((DefaultTableModel)tbAcc.getModel()).insertRow(rs.getRow() - 1, row);
+//            }
+//        }
+//        catch(Exception ex)
+//        {
+//            System.out.println(ex);
+//        }
+//    }
+//    void LoadtbCost(){
+//        tbCost.removeAll();
+//                
+//        //liệt kê những phòng chưa thanh toán tiền trong tháng
+//        String query = "Select ID_Room, Room_Title, ID_Type, Owner, Status where ";
+//         
+//        ResultSet rs = null;
+//        //rs = ExecuteQuery(query);
+//        
+//        try{
+//            while(tbCost.getRowCount() > 0)
+//            {
+//                ((DefaultTableModel)tbCost.getModel()).removeRow(0);
+//            }
+//            int columns = rs.getMetaData().getColumnCount();
+//            while(rs.next())
+//            {
+//                Object[] row = new Object[columns];
+//                for(int i = 1; i <= columns; i++)
+//                {
+//                    row[i - 1] = rs.getObject(i);
+//                }
+//                ((DefaultTableModel)tbCost.getModel()).insertRow(rs.getRow() - 1, row);
+//            }
+//        }
+//        catch(Exception ex)
+//        {
+//            System.out.println(ex);
+//        }
+//    }
+//        public int ID_Room;
+    
     void LoadRoomList(){
         
     }
@@ -2013,13 +1880,13 @@ public class OwnerForm extends javax.swing.JFrame {
     private javax.swing.JButton btnLoadTotal;
     private javax.swing.JButton btnModify;
     private javax.swing.JButton btnPay;
+    private javax.swing.JButton btnRegisterRoomMate;
     private javax.swing.JButton btnUpdAcc;
     private javax.swing.JButton btnUpdRoom;
     private javax.swing.JButton btnUpdType;
     private javax.swing.JButton btnViewContract;
     private javax.swing.JButton btnWarn;
     private com.toedter.calendar.JDateChooser dcsDateEnroll;
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox8;
     private javax.swing.JLabel jLabel1;

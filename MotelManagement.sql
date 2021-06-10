@@ -120,11 +120,11 @@ FROM Room_Info RI JOIN Room R ON RI.ID_Room=R.ID_Room
 				JOIN Client CL ON RI.ID_Client = CL.ID_Client
 				
 
-
 SELECT * FROM Room_Info
 SELECT * FROM TypeRoom
 SELECT * FROM Room
 SELECT * FROM Client
+SELECT * FROM Contract
 
 SELECT R.ID_Room, R.ID_Type, R.Room_Title, C.Name_Client, Co.status 
 FROM Contract Co JOIN Room R ON Co.ID_Room=R.ID_Room 
@@ -163,9 +163,11 @@ DELETE Contract WHERE ID_Contract='HD004';
 --Nhap ID COntract -> ID Room, Amount
 SELECT R.ID_Room, T.amount_people FROM Room R JOIN Contract C ON R.ID_Room=C.ID_Room JOIN TypeRoom T ON R.ID_Type=T.ID_Type WHERE ID_Contract='HD002'
 
+--Nhap ID Contract -> thong tin Room Mate
+SELECT RI.ID_Room, RI.ID_Contract, RI.ID_Client, C.Name_Client FROM Room_Info RI JOIN Client C ON RI.ID_Client=C.ID_Client WHERE ID_Contract='HD001'
 
-
-
+--Tinh tong so luong nguoi hien tai co trong phong
+SELECT COUNT(*) AS amountOfPeople FROM Room_Info WHERE ID_Contract='HD002'
 
 
 

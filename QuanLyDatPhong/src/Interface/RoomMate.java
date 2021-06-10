@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -48,7 +49,7 @@ public class RoomMate extends javax.swing.JFrame {
         btnShow = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblRoomInfo = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -56,23 +57,23 @@ public class RoomMate extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtNameClient = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
+        btnModify = new javax.swing.JButton();
+        btnDel = new javax.swing.JButton();
+        btnClear = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel3.setText("Amount of people");
+        jLabel3.setText("Số lượng người tối đa");
 
         jLabel4.setText("ID Room");
 
         jLabel5.setText("ID Contract");
 
-        btnShow.setText("Show");
+        btnShow.setText("Xem");
         btnShow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnShowActionPerformed(evt);
@@ -100,7 +101,7 @@ public class RoomMate extends javax.swing.JFrame {
                             .addGap(18, 18, 18)
                             .addComponent(txtAmountPeople, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,7 +126,7 @@ public class RoomMate extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("Đăng Ký Thành Viên Cùng Phòng");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblRoomInfo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -136,13 +137,13 @@ public class RoomMate extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblRoomInfo);
 
-        jLabel1.setText("Register Roommate");
+        jLabel1.setText("Đăng Ký Thành Viên");
 
         jLabel6.setText("ID Client");
 
-        jLabel7.setText("Name");
+        jLabel7.setText("Họ & Tên");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -180,13 +181,18 @@ public class RoomMate extends javax.swing.JFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Thêm");
+        btnAdd.setText("Thêm");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Sửa");
+        btnModify.setText("Sửa");
 
-        jButton3.setText("Xóa");
+        btnDel.setText("Xóa");
 
-        jButton4.setText("Làm mới");
+        btnClear.setText("Làm mới");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -195,12 +201,12 @@ public class RoomMate extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(btnDel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                    .addComponent(btnModify, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -208,16 +214,16 @@ public class RoomMate extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap(13, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnAdd)
+                    .addComponent(btnModify))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(btnDel)
+                    .addComponent(btnClear))
                 .addContainerGap())
         );
 
-        btnExit.setText("Exit");
+        btnExit.setText("Thoát");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
@@ -282,6 +288,30 @@ public class RoomMate extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnExitActionPerformed
 
+    private void loadInfoRoommate(){
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
+            String query="SELECT RI.ID_Room, RI.ID_Contract, RI.ID_Client, C.Name_Client FROM Room_Info RI JOIN Client C ON RI.ID_Client=C.ID_Client WHERE ID_Contract=?";
+            Connection con=DriverManager.getConnection(dbURL);
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setString(1, txtIDContract.getText());
+            ResultSet rs = ps.executeQuery();
+            DefaultTableModel m=new DefaultTableModel(new Object[]{"ID Romm","ID Contract","ID Client","Họ và tên"}, 0);
+               tblRoomInfo.setModel(m);
+            while (rs.next()) {
+                ((DefaultTableModel)tblRoomInfo.getModel()).addRow(new Object[]{
+                    rs.getString(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4)
+                });
+            }
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+    }
+    
     private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
         if(txtIDContract.getText().equals("")==false){
             String  idRoom = null;
@@ -298,15 +328,71 @@ public class RoomMate extends javax.swing.JFrame {
                     idRoom=rs_STT.getString("ID_Room");
                     amountOfPeople=rs_STT.getString("amount_people");
                 }
-                
             }catch(Exception ex){
                 System.out.println(ex);
             }
             txtIDRoom.setText(idRoom);
             txtAmountPeople.setText(amountOfPeople);
+            loadInfoRoommate();
         }
         else JOptionPane.showMessageDialog(rootPane, "Chua nhap ID Contract");
     }//GEN-LAST:event_btnShowActionPerformed
+
+    //Kiem tar so luong nguoi trong phong
+    private int checkAmountOfPeople(){
+        int amountOfPeople = 0;
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
+            String query="SELECT COUNT(*) AS amountOfPeople FROM Room_Info WHERE ID_Contract=?";
+            Connection con=DriverManager.getConnection(dbURL);
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setString(1, txtIDContract.getText());
+            ResultSet rs_STT=ps.executeQuery();
+            while(rs_STT.next()){
+                amountOfPeople=rs_STT.getInt("amountOfPeople");
+            }
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+        return amountOfPeople;
+    }
+    
+    private boolean confirmInfoRoommate(){
+        boolean check=true;
+        if(txtNameClient.getText().equals("")==true){
+            JOptionPane.showMessageDialog(rootPane, "Phai nhap day du cac thong tin");
+            check=false;
+        }
+        return check;
+    }
+    
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        if(checkAmountOfPeople()>Integer.valueOf(txtAmountPeople.getText())){
+            if(confirmInfoRoommate()==true){
+                String query="INSERT INTO Room_Info VALUES (?, ?, ?);";
+                String idRoom=txtIDRoom.getText();
+                String idClient=txtIDClient.getText();
+                String idContract= txtIDContract.getText();
+
+                try {
+                    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                    String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
+                    Connection con=DriverManager.getConnection(dbURL);
+                    PreparedStatement ps=con.prepareStatement(query);
+                    ps.setString(1, idRoom);
+                    ps.setString(2, idClient);
+                    ps.setString(3, idContract);
+
+                    ps.executeUpdate();
+                }catch(Exception ex){
+                    System.out.println(ex);
+                }
+                loadInfoRoommate();
+            }
+        }
+        else JOptionPane.showMessageDialog(rootPane, "Đã đủ người. Không thể thêm thành viên");
+    }//GEN-LAST:event_btnAddActionPerformed
 
     /**
      * @param args the command line arguments
@@ -344,12 +430,12 @@ public class RoomMate extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnClear;
+    private javax.swing.JButton btnDel;
     private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnModify;
     private javax.swing.JButton btnShow;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -362,7 +448,7 @@ public class RoomMate extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblRoomInfo;
     private javax.swing.JTextField txtAmountPeople;
     private javax.swing.JTextField txtIDClient;
     private javax.swing.JTextField txtIDContract;
