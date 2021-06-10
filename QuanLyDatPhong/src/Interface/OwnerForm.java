@@ -75,6 +75,7 @@ public class OwnerForm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblContract_Management = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        btnRefreshContract = new javax.swing.JButton();
         jPanel14 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
@@ -369,11 +370,11 @@ public class OwnerForm extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
+                        .addGap(18, 18, 18)
                         .addComponent(btnClient)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnRegisterRoomMate, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Đặt Phòng", jPanel1);
@@ -420,27 +421,41 @@ public class OwnerForm extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
         jLabel1.setText("Quản Lý Hợp Đồng");
 
+        btnRefreshContract.setText("Refresh");
+        btnRefreshContract.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshContractActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(331, 331, 331)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(20, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(331, 331, 331)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(btnRefreshContract)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(64, 64, 64)
+                .addGap(17, 17, 17)
+                .addComponent(btnRefreshContract)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addGap(40, 40, 40)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Hợp Đồng", jPanel2);
@@ -651,7 +666,7 @@ public class OwnerForm extends javax.swing.JFrame {
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addGap(90, 90, 90)
                         .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Tài Khoản", jPanel14);
@@ -931,7 +946,7 @@ public class OwnerForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -957,9 +972,7 @@ public class OwnerForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 713, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 697, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -1471,6 +1484,11 @@ public class OwnerForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtIDClient_AccountKeyPressed
 
+    //Nút refresh của tab Quản Lý hợp đồng
+    private void btnRefreshContractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshContractActionPerformed
+        loadTableContractManagement();
+    }//GEN-LAST:event_btnRefreshContractActionPerformed
+
 //    -----------------------------------------Tab Quan Ly Phi Sinh Hoat----------------------------------
     private void loadTableBillManagement(){
         try{
@@ -1716,6 +1734,7 @@ public class OwnerForm extends javax.swing.JFrame {
     private javax.swing.JButton btnModify;
     private javax.swing.JButton btnModifyAccount;
     private javax.swing.JButton btnPay;
+    private javax.swing.JButton btnRefreshContract;
     private javax.swing.JButton btnRegisterRoomMate;
     private javax.swing.JButton btnWarn;
     private com.toedter.calendar.JDateChooser dcsDateEnroll;

@@ -19,6 +19,9 @@ public class CustomerForm extends javax.swing.JFrame {
      */
     public CustomerForm() {
         initComponents();
+        
+        //Set form in center
+        this.setLocationRelativeTo(null);
     }
 
     /**

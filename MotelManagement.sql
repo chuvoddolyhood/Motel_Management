@@ -104,7 +104,6 @@ INSERT INTO Room_Info VALUES ('P01', 'C0003', 'HD001');
 INSERT INTO Room_Info VALUES ('P07', 'C0001', 'HD002');
 INSERT INTO Room_Info VALUES ('P07', 'C0002', 'HD002');
 
-
 ---------------------------------------Account-----------------------------------------
 SELECT * FROM Account;
 INSERT INTO Account VALUES('C0001','duc','duc123');

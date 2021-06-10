@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -58,7 +59,6 @@ public class RoomMate extends javax.swing.JFrame {
         txtNameClient = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         btnAdd = new javax.swing.JButton();
-        btnModify = new javax.swing.JButton();
         btnDel = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
@@ -138,6 +138,11 @@ public class RoomMate extends javax.swing.JFrame {
 
             }
         ));
+        tblRoomInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblRoomInfoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblRoomInfo);
 
         jLabel1.setText("Đăng Ký Thành Viên");
@@ -195,11 +200,19 @@ public class RoomMate extends javax.swing.JFrame {
             }
         });
 
-        btnModify.setText("Sửa");
-
         btnDel.setText("Xóa");
+        btnDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelActionPerformed(evt);
+            }
+        });
 
         btnClear.setText("Làm mới");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -210,24 +223,23 @@ public class RoomMate extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                     .addComponent(btnDel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                    .addComponent(btnModify, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap(13, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd)
-                    .addComponent(btnModify))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDel)
-                    .addComponent(btnClear))
-                .addContainerGap())
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(btnAdd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDel)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(btnClear)
+                        .addGap(24, 24, 24))))
         );
 
         btnExit.setText("Thoát");
@@ -396,6 +408,7 @@ public class RoomMate extends javax.swing.JFrame {
                     System.out.println(ex);
                 }
                 loadInfoRoommate();
+                btnClearActionPerformed(evt);
             }
             else JOptionPane.showMessageDialog(rootPane, "Đã đủ người. Không thể thêm thành viên");
         }
@@ -422,6 +435,39 @@ public class RoomMate extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_txtIDClientKeyPressed
+
+    private void tblRoomInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRoomInfoMouseClicked
+        int selectedIndex=tblRoomInfo.getSelectedRow();
+        txtIDClient.setText(tblRoomInfo.getValueAt(selectedIndex, 2)+"");
+        txtNameClient.setText(tblRoomInfo.getValueAt(selectedIndex, 3)+"");
+    }//GEN-LAST:event_tblRoomInfoMouseClicked
+
+    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
+        String idClient=txtIDClient.getText();
+
+        int confirm=JOptionPane.showConfirmDialog(rootPane, "Ban co chac muon xoa khoi danh sach khong?","",JOptionPane.YES_NO_OPTION);
+        if(confirm== JOptionPane.YES_OPTION){
+            try {
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
+                String query="DELETE Room_Info WHERE ID_Client=?;";
+                Connection con=DriverManager.getConnection(dbURL);
+                PreparedStatement ps=con.prepareStatement(query);
+                ps.setString(1, idClient);
+
+                ps.executeUpdate();
+            }catch(Exception ex){
+                System.out.println(ex);
+            }
+            btnClearActionPerformed(evt);
+            loadInfoRoommate();
+        }
+    }//GEN-LAST:event_btnDelActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        txtIDClient.setText("");
+        txtNameClient.setText("");
+    }//GEN-LAST:event_btnClearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -463,7 +509,6 @@ public class RoomMate extends javax.swing.JFrame {
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDel;
     private javax.swing.JButton btnExit;
-    private javax.swing.JButton btnModify;
     private javax.swing.JButton btnShow;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
