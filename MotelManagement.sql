@@ -120,11 +120,17 @@ FROM Room_Info RI JOIN Room R ON RI.ID_Room=R.ID_Room
 				JOIN Client CL ON RI.ID_Client = CL.ID_Client
 				
 
-SELECT * FROM Room_Info
+
 SELECT * FROM TypeRoom
 SELECT * FROM Room
 SELECT * FROM Client
 SELECT * FROM Contract
+SELECT * FROM Room_Info
+
+DELETE Room_Info WHERE ID_Contract='HD005'
+DELETE Contract WHERE ID_Contract='HD009'
+
+
 
 SELECT R.ID_Room, R.ID_Type, R.Room_Title, C.Name_Client, Co.status 
 FROM Contract Co JOIN Room R ON Co.ID_Room=R.ID_Room 
@@ -171,7 +177,7 @@ SELECT COUNT(*) AS amountOfPeople FROM Room_Info WHERE ID_Contract='HD002'
 
 
 
-
+UPDATE Room_Info SET ID_Room='P09', ID_Client='C0002' WHERE ID_Contract='HD009'
 
 
 

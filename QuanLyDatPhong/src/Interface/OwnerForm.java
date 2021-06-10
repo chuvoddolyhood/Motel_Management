@@ -1446,7 +1446,6 @@ public class OwnerForm extends javax.swing.JFrame {
     }
     
     //Bam vao bang -> hien thi thong tin ra textview
-    
     private void tblContractMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblContractMouseClicked
         int selectedIndex=tblContract.getSelectedRow();
         txtIDContract.setText(tblContract.getValueAt(selectedIndex, 0)+"");
@@ -1491,30 +1490,92 @@ public class OwnerForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnClearActionPerformed
 
+    //Xóa thông tin ở bảng Contract
+    private void deleteContractDTB(){
+        String idContract=txtIDContract.getText();
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
+            String query="DELETE Contract WHERE ID_Contract=?";
+            Connection con=DriverManager.getConnection(dbURL);
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setString(1, idContract);
+
+            ps.executeUpdate();
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+    }
+    
+    //Xóa thông tin ở bảng Room_Info
+    private void deleteRoom_InfoDTB(){
+        String idContract=txtIDContract.getText();
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
+            String query="DELETE Room_Info WHERE ID_Contract=?;";
+            Connection con=DriverManager.getConnection(dbURL);
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setString(1, idContract);
+
+            ps.executeUpdate();
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+    }
+    
     //Nút xóa
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
         String idContract=txtIDContract.getText();
         int confirm=JOptionPane.showConfirmDialog(rootPane, "Ban co chac muon xoa hop dong"+idContract+" khoi danh sach khong?","",JOptionPane.YES_NO_OPTION);
         if(confirm== JOptionPane.YES_OPTION){
-            try {
-                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
-                String query="DELETE Contract WHERE ID_Contract=?;";
-                Connection con=DriverManager.getConnection(dbURL);
-                PreparedStatement ps=con.prepareStatement(query);
-                ps.setString(1, idContract);
-
-                ps.executeUpdate();
-            }catch(Exception ex){
-                System.out.println(ex);
-            }
-
+            deleteRoom_InfoDTB(); //Xoa thong tin o bang Room_Info
+            deleteContractDTB(); //Xoa thong tin o bang Contract
+            
             loadInfoRoom();
             btnClearActionPerformed(evt);
-            //addTableContract(idContract, idOwner, idRoom, dateEnroll);
         }
     }//GEN-LAST:event_btnDelActionPerformed
 
+    //Sửa đổi thông tin trong bảng Contract
+    private void modifyContractDTB(String idOwner, String idRoom, String dateEnroll, String idContract){
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
+            String query="UPDATE Contract SET ID_representativeClient=?, ID_Room=?, Date_Enroll=? WHERE ID_Contract=?;";
+            Connection con=DriverManager.getConnection(dbURL);
+            PreparedStatement ps=con.prepareStatement(query);
+
+            ps.setString(1, idOwner);
+            ps.setString(2, idRoom);
+            ps.setString(3, dateEnroll);
+            ps.setString(4, idContract);
+
+            ps.executeUpdate();
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+    }
+    
+    //Sửa đổi thông tin trong bảng Room_Info
+    private void modifyRoom_InfoDTB(String idOwner, String idRoom, String idContract){
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
+            String query="UPDATE Room_Info SET ID_Room=?, ID_Client=? WHERE ID_Contract=?";
+            Connection con=DriverManager.getConnection(dbURL);
+            PreparedStatement ps=con.prepareStatement(query);
+            
+            ps.setString(1, idRoom);
+            ps.setString(2, idOwner);
+            ps.setString(3, idContract);
+
+            ps.executeUpdate();
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+    }
+    
     //Cap nhat sua doi Contract (Nút sửa)
     private void btnModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyActionPerformed
         String idContract=txtIDContract.getText();
@@ -1524,23 +1585,8 @@ public class OwnerForm extends javax.swing.JFrame {
 
         int confirm=JOptionPane.showConfirmDialog(rootPane, "Ban co chac muon chinh sua thong tin khong?","",JOptionPane.YES_NO_OPTION);
         if(confirm== JOptionPane.YES_OPTION){
-            try {
-                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
-                String query="UPDATE Contract SET ID_representativeClient=?, ID_Room=?, Date_Enroll=? WHERE ID_Contract=?;";
-                Connection con=DriverManager.getConnection(dbURL);
-                PreparedStatement ps=con.prepareStatement(query);
-
-                ps.setString(1, idOwner);
-                ps.setString(2, idRoom);
-                ps.setString(3, dateEnroll);
-                ps.setString(4, idContract);
-
-                ps.executeUpdate();
-            }catch(Exception ex){
-                System.out.println(ex);
-            }
-            //btnClearActionPerformed(evt);
+            modifyContractDTB(idOwner, idRoom, dateEnroll, idContract); //Sua thong tin trong bang Contract
+            modifyRoom_InfoDTB(idOwner, idRoom, idContract); //Sua thong tin trong bang Room_Info
             addTableContract(idContract, idOwner, idRoom, dateEnroll);
             loadInfoRoom();
         }
