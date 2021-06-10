@@ -191,11 +191,24 @@ UPDATE Account SET Username='nhien', Password='nhien000' WHERE ID_Client='C0003'
 DELETE Account WHERE ID_Client='C0003'
 
 --
-SELECT * FROM Bill
+
 
 SELECT B.ID_Bill, C.ID_Contract, C.ID_Room, C.status, C.Date_Enroll, B.Date_Note, B.Electric, B.Water, B.Internet,B.Money_Room,B.Cost
 FROM Bill B JOIN Contract C ON B.ID_Contract=C.ID_Contract
 
+SELECT * FROM Bill
+
+SELECT * FROM Contract
+
+--Danh sach hop dong co ngay dang ky la ngay 10
+SELECT Co.ID_Contract,Co.ID_Room,Ci.Name_Client, Co.Date_Enroll
+FROM Contract Co JOIN Client Ci ON Co.ID_representativeClient=Ci.ID_Client
+WHERE Day(Date_Enroll)='10'
 
 
 
+
+SELECT R.ID_Room, R.ID_Type, R.Room_Title, C.Name_Client, Co.status 
+FROM Contract Co JOIN Room R ON Co.ID_Room=R.ID_Room 
+				JOIN Client C ON Co.ID_representativeClient=C.ID_Client
+WHERE Co.status='live'
