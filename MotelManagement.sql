@@ -240,6 +240,12 @@ SELECT MONTH(Date_Note) AS month_note, YEAR(Date_Note) AS year_note
 FROM Bill 
 WHERE ID_Contract='HD002' AND ID_Bill=(SELECT MAX(ID_Bill) FROM Bill WHERE ID_Contract='HD002')
 
+SELECT * FROM Account WHERE ID_Client='C0002'
 
 
+SELECT T.Money FROM Room R JOIN TypeRoom T ON R.ID_Type=T.ID_Type WHERE R.ID_Room='P01'
+
+SELECT C.ID_Contract FROM Room R JOIN Contract C ON R.ID_Room=C.ID_Room WHERE R.ID_Room='P01' AND C.status='Live'
+
+UPDATE Contract SET status='Expire' WHERE ID_Contract=?;
 

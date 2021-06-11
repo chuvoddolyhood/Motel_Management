@@ -71,6 +71,7 @@ public class OwnerForm extends javax.swing.JFrame {
         jScrollPane7 = new javax.swing.JScrollPane();
         tblContract = new javax.swing.JTable();
         jLabel27 = new javax.swing.JLabel();
+        btnRefreshTableRoomOrder = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -113,10 +114,12 @@ public class OwnerForm extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         btnPay = new javax.swing.JButton();
         jLabel23 = new javax.swing.JLabel();
-        btnLoadTotal = new javax.swing.JButton();
         btnCancelTotal = new javax.swing.JButton();
         txtIDBill = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtIDContract_Bill = new javax.swing.JTextField();
+        btnCancelContract = new javax.swing.JButton();
         jPanel19 = new javax.swing.JPanel();
         btnWarn = new javax.swing.JButton();
         jLabel24 = new javax.swing.JLabel();
@@ -125,10 +128,12 @@ public class OwnerForm extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        btnCalculatorBill = new javax.swing.JButton();
+        txtIDRoom_Bill = new javax.swing.JTextField();
+        jLabel30 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tblBill = new javax.swing.JTable();
         txtCurrentTime = new javax.swing.JTextField();
-        txtContractBill1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -332,17 +337,25 @@ public class OwnerForm extends javax.swing.JFrame {
 
         jLabel27.setText("Thông tin hợp đồng");
 
+        btnRefreshTableRoomOrder.setText("Refresh");
+        btnRefreshTableRoomOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshTableRoomOrderActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(313, 313, 313))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(213, 213, 213)
+                        .addComponent(btnRefreshTableRoomOrder))
                     .addComponent(jScrollPane7)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -355,7 +368,7 @@ public class OwnerForm extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnClient, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
                                     .addComponent(btnRegisterRoomMate, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
-                        .addGap(0, 1, Short.MAX_VALUE))
+                        .addGap(0, 7, Short.MAX_VALUE))
                     .addComponent(jScrollPane2))
                 .addContainerGap())
         );
@@ -363,7 +376,9 @@ public class OwnerForm extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(btnRefreshTableRoomOrder))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
@@ -378,7 +393,7 @@ public class OwnerForm extends javax.swing.JFrame {
                         .addComponent(btnClient)
                         .addGap(18, 18, 18)
                         .addComponent(btnRegisterRoomMate, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Đặt Phòng", jPanel1);
@@ -437,7 +452,7 @@ public class OwnerForm extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -650,7 +665,7 @@ public class OwnerForm extends javax.swing.JFrame {
                                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 65, Short.MAX_VALUE))
+                        .addGap(0, 71, Short.MAX_VALUE))
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -699,7 +714,7 @@ public class OwnerForm extends javax.swing.JFrame {
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel20Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane3)
                 .addContainerGap())
         );
         jPanel20Layout.setVerticalGroup(
@@ -742,22 +757,28 @@ public class OwnerForm extends javax.swing.JFrame {
         btnPay.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btnPay.setText("Đã thanh toán");
         btnPay.setEnabled(false);
+        btnPay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPayActionPerformed(evt);
+            }
+        });
 
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel23.setText("Phí sinh hoạt trong tháng");
 
-        btnLoadTotal.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        btnLoadTotal.setText("Calculate");
-        btnLoadTotal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoadTotalActionPerformed(evt);
-            }
-        });
-
         btnCancelTotal.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        btnCancelTotal.setText("Cancel");
+        btnCancelTotal.setText("Hủy");
 
         jLabel3.setText("ID Bill");
+
+        jLabel4.setText("ID Contract");
+
+        btnCancelContract.setText("Trả Phòng");
+        btnCancelContract.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelContractActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
@@ -766,70 +787,69 @@ public class OwnerForm extends javax.swing.JFrame {
             .addGroup(jPanel21Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
-                        .addComponent(jLabel22)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
-                        .addComponent(btnLoadTotal)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCancelTotal))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnPay))
                     .addGroup(jPanel21Layout.createSequentialGroup()
-                        .addComponent(jLabel19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtWaterPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnPay)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancelContract, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel23)
                     .addGroup(jPanel21Layout.createSequentialGroup()
-                        .addComponent(jLabel20)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
-                        .addComponent(txtInterPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel21Layout.createSequentialGroup()
-                        .addComponent(jLabel23)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
                         .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel18)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel20)
+                            .addComponent(jLabel19)
+                            .addComponent(jLabel22)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(37, 37, 37)
                         .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtElecPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                            .addComponent(txtIDBill))))
-                .addContainerGap())
+                            .addComponent(txtIDBill, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+                            .addComponent(txtIDContract_Bill)
+                            .addComponent(txtElecPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtWaterPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtInterPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel21Layout.setVerticalGroup(
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel21Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel23)
-                .addGap(33, 33, 33)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtIDBill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(18, 18, 18)
+                .addGap(15, 15, 15)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel21Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(txtElecPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtWaterPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel19))
+                        .addGap(22, 22, 22)
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtInterPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel20))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel22)))
+                    .addGroup(jPanel21Layout.createSequentialGroup()
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtIDContract_Bill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel18)))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(txtElecPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19)
-                    .addComponent(txtWaterPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20)
-                    .addComponent(txtInterPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel22)
-                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLoadTotal)
-                    .addComponent(btnCancelTotal))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addComponent(btnPay)
-                .addContainerGap())
+                    .addComponent(btnPay)
+                    .addComponent(btnCancelTotal)
+                    .addComponent(btnCancelContract))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel19.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -853,6 +873,17 @@ public class OwnerForm extends javax.swing.JFrame {
 
         jLabel17.setText("(Tiền Nước: số nước * 7000VNĐ)");
 
+        btnCalculatorBill.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        btnCalculatorBill.setText("Tính tiền");
+        btnCalculatorBill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalculatorBillActionPerformed(evt);
+            }
+        });
+
+        jLabel30.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        jLabel30.setText("Phòng");
+
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
         jPanel19Layout.setHorizontalGroup(
@@ -860,42 +891,58 @@ public class OwnerForm extends javax.swing.JFrame {
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel19Layout.createSequentialGroup()
-                        .addGap(168, 168, 168)
-                        .addComponent(btnWarn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel16))
                     .addGroup(jPanel19Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel24)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtElec, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel25)
+                        .addGap(34, 34, 34)
+                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel25)
+                                .addComponent(jLabel30))
+                            .addComponent(jLabel24))
                         .addGap(18, 18, 18)
-                        .addComponent(txtWater, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-            .addGroup(jPanel19Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel16)
+                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtElec, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtIDRoom_Bill, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtWater, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel17)
-                .addGap(40, 40, 40))
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addGap(32, 32, 32))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
+                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnWarn, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                            .addComponent(btnCalculatorBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(20, 20, 20))))
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnWarn)
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel19Layout.createSequentialGroup()
+                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtIDRoom_Bill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel30, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel24)
+                            .addComponent(txtElec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel19Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnWarn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCalculatorBill)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel24)
-                    .addComponent(txtElec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel25)
                     .addComponent(txtWater, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(jLabel17))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         tblBill.setModel(new javax.swing.table.DefaultTableModel(
@@ -922,23 +969,19 @@ public class OwnerForm extends javax.swing.JFrame {
                     .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
                         .addComponent(txtCurrentTime, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
                         .addComponent(jLabel15)
                         .addGap(302, 302, 302))
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addComponent(jScrollPane4)
                         .addContainerGap())))
-            .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel16Layout.createSequentialGroup()
-                    .addGap(39, 39, 39)
-                    .addComponent(txtContractBill1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(679, Short.MAX_VALUE)))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -952,16 +995,11 @@ public class OwnerForm extends javax.swing.JFrame {
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                        .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                    .addContainerGap(455, Short.MAX_VALUE)
-                    .addComponent(txtContractBill1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(172, 172, 172)))
         );
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -981,9 +1019,7 @@ public class OwnerForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 857, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 863, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1505,22 +1541,7 @@ public class OwnerForm extends javax.swing.JFrame {
         loadTableContractManagement();
     }//GEN-LAST:event_btnRefreshContractActionPerformed
 
-    private void btnLoadTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadTotalActionPerformed
-        int electric=Integer.valueOf(txtElec.getText());
-        int water=Integer.valueOf(txtWater.getText());
-        
-        int price_electric= electric*3000;
-        int price_water= water*7000;
-        int price_internet= 25000;
-        int totalPrice=price_electric+price_water+price_internet;
-        
-        txtElecPrice.setText(String.valueOf(price_electric));
-        txtWaterPrice.setText(String.valueOf(price_water));
-        txtInterPrice.setText(String.valueOf(price_internet));
-        txtTotal.setText(String.valueOf(totalPrice));
-    }//GEN-LAST:event_btnLoadTotalActionPerformed
-
-//    -----------------------------------------Tab Quan Ly Phi Sinh Hoat----------------------------------
+    //    -----------------------------------------Tab Quan Ly Phi Sinh Hoat----------------------------------
     private void loadTableBillManagement(){
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -1620,6 +1641,120 @@ public class OwnerForm extends javax.swing.JFrame {
         else if(numberID<999) txtIDBill.setText(ancestors +"0"+ String.valueOf(numberID+1));
         else txtIDBill.setText(ancestors + String.valueOf(numberID+1));
     }
+    
+    private void btnCalculatorBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalculatorBillActionPerformed
+        getIDContractFromIDRoom();
+        
+        int electric=Integer.valueOf(txtElec.getText());
+        int water=Integer.valueOf(txtWater.getText());
+        
+        int price_electric= electric*3000;
+        int price_water= water*7000;
+        int price_internet= 25000;
+        int totalPrice=price_electric+price_water+price_internet;
+        
+        txtElecPrice.setText(String.valueOf(price_electric));
+        txtWaterPrice.setText(String.valueOf(price_water));
+        txtInterPrice.setText(String.valueOf(price_internet));
+        txtTotal.setText(String.valueOf(totalPrice));
+        
+        btnPay.setEnabled(true);
+    }//GEN-LAST:event_btnCalculatorBillActionPerformed
+
+
+    private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
+        String idBill=txtIDBill.getText();
+        String idContract_Bill=txtIDContract_Bill.getText();
+        String currentTime=dateFormat.format(calendar.getTime());
+        String electric=txtElec.getText();
+        String water=txtWater.getText();
+        int internet=1;
+        int costRoom=getMoneyRoom();
+        String cost=txtTotal.getText();
+            
+        try {
+            String query="INSERT INTO Bill VALUES(?,?,?, ?, ?, ?, ?, ?);";
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
+            Connection con=DriverManager.getConnection(dbURL);
+            PreparedStatement ps=con.prepareStatement(query);
+                ps.setString(1, idBill);
+                ps.setString(2, idContract_Bill);
+                ps.setString(3, currentTime);
+                ps.setString(4, electric);
+                ps.setString(5, water);
+                ps.setInt(6, internet);
+                ps.setInt(7, costRoom);
+                ps.setString(8, cost);
+                
+                ps.executeUpdate();
+            }catch(Exception ex){
+                System.out.println(ex);
+            }
+        loadTableBillManagement();
+    }//GEN-LAST:event_btnPayActionPerformed
+
+    private void btnCancelContractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelContractActionPerformed
+        int confirm=JOptionPane.showConfirmDialog(rootPane, "Ban co chac muon HUY HOP DONG khong?","",JOptionPane.YES_NO_OPTION);
+        if(confirm== JOptionPane.YES_OPTION){
+            try {
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
+                String query="UPDATE Contract SET status='Expire' WHERE ID_Contract=?;";
+                Connection con=DriverManager.getConnection(dbURL);
+                PreparedStatement ps=con.prepareStatement(query);
+                ps.setString(1, txtIDContract_Bill.getText());
+
+                ps.executeUpdate();
+            }catch(Exception ex){
+                System.out.println(ex);
+            }
+            JOptionPane.showMessageDialog(rootPane, "Đã hủy hợp đồng!");
+        }
+    }//GEN-LAST:event_btnCancelContractActionPerformed
+
+    private void btnRefreshTableRoomOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshTableRoomOrderActionPerformed
+        loadInfoRoom();
+    }//GEN-LAST:event_btnRefreshTableRoomOrderActionPerformed
+
+    
+    private void getIDContractFromIDRoom(){
+        try{
+                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+                String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
+                String query="SELECT C.ID_Contract FROM Room R JOIN Contract C ON R.ID_Room=C.ID_Room WHERE R.ID_Room=? AND C.status='Live'";
+                Connection con=DriverManager.getConnection(dbURL);
+                PreparedStatement ps=con.prepareStatement(query);
+                ps.setString(1, txtIDRoom_Bill.getText());
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    txtIDContract_Bill.setText(rs.getString("ID_Contract"));
+                }
+            }catch(Exception ex){
+                System.out.println(ex);
+            }
+    }
+    
+    private int getMoneyRoom(){
+        int moneyRoom=0;
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
+            String query="SELECT T.Money FROM Room R JOIN TypeRoom T ON R.ID_Type=T.ID_Type WHERE R.ID_Room=?;";
+            Connection con=DriverManager.getConnection(dbURL);
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setString(1, txtIDRoom_Bill.getText());
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                moneyRoom=rs.getInt("Money");
+            }
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+        return moneyRoom;
+    }
              
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -1657,17 +1792,19 @@ public class OwnerForm extends javax.swing.JFrame {
     private javax.swing.JLabel Password;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnAddAccount;
+    private javax.swing.JButton btnCalculatorBill;
+    private javax.swing.JButton btnCancelContract;
     private javax.swing.JButton btnCancelTotal;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnClearInfoAccount;
     private javax.swing.JButton btnClient;
     private javax.swing.JButton btnDel;
     private javax.swing.JButton btnDelAccount;
-    private javax.swing.JButton btnLoadTotal;
     private javax.swing.JButton btnModify;
     private javax.swing.JButton btnModifyAccount;
     private javax.swing.JButton btnPay;
     private javax.swing.JButton btnRefreshContract;
+    private javax.swing.JButton btnRefreshTableRoomOrder;
     private javax.swing.JButton btnRegisterRoomMate;
     private javax.swing.JButton btnWarn;
     private com.toedter.calendar.JDateChooser dcsDateEnroll;
@@ -1689,6 +1826,8 @@ public class OwnerForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel48;
@@ -1722,15 +1861,16 @@ public class OwnerForm extends javax.swing.JFrame {
     private javax.swing.JTable tblContract;
     private javax.swing.JTable tblContract_Management;
     private javax.swing.JTable tblNoti;
-    private javax.swing.JTextField txtContractBill1;
     private javax.swing.JTextField txtCurrentTime;
     private javax.swing.JTextField txtElec;
     private javax.swing.JTextField txtElecPrice;
     private javax.swing.JTextField txtIDBill;
     private javax.swing.JTextField txtIDClient_Account;
     private javax.swing.JTextField txtIDContract;
+    private javax.swing.JTextField txtIDContract_Bill;
     private javax.swing.JTextField txtIDOwner;
     private javax.swing.JTextField txtIDRoom;
+    private javax.swing.JTextField txtIDRoom_Bill;
     private javax.swing.JTextField txtInterPrice;
     private javax.swing.JTextField txtNameClient_Account;
     private javax.swing.JTextField txtPassword;
