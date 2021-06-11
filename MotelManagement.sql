@@ -64,6 +64,7 @@ CREATE TABLE Account(
 SELECT * FROM Client;
 
 INSERT INTO Client VALUES('C0001','Tran Nhan Duc','092200000295','Nam','Jan 24 1997','Khanh Hoa','0939635855');
+
 INSERT INTO Client VALUES('C0002','Nguyen Dinh Phuoc','092200000290','Nam','Sep 4 1997','Kien Giang','0839635895');
 INSERT INTO Client VALUES('C0003','Nguyen Thi Nhien','092200000260','Nu','Sep 10 1999','Kien Giang','0839635890');
 INSERT INTO Client VALUES('C0004','Nguyen Thi Nhien','092200000260','Nu','Sep 10 1999','Kien Giang', '0839635890');
@@ -90,23 +91,24 @@ INSERT INTO Room VALUES ('P11','Phong so 11', 'T3');
 
 ------------------------------Contract------------------------------
 SELECT * FROM Contract;
-INSERT INTO Contract VALUES('HD001','C0003','P01','Jun 5 2021',null,'live');
-INSERT INTO Contract VALUES('HD002','C0001','P07','Jun 8 2021',null,'live');
-
+INSERT INTO Contract VALUES('HD001','C0001','P01','Apr 11 2021',null,'live');
+DELETE Contract WHERE ID_Contract='HD002'
 ------------------------------Bill------------------------------
 SELECT * FROM Bill;
-INSERT INTO Bill VALUES('B0001','HD001','Jul 5 2021', 12, 8, 1, 800000, 937000);
-INSERT INTO Bill VALUES('B0002','HD002','May 8 2021', 20, 13, 1, 1000000, 1209000);
-
+INSERT INTO Bill VALUES('B0001','HD001','May 5 2021', 12, 8, 1, 800000, 937000);
+DELETE Bill
 ------------------------------Room Info------------------------------
 SELECT * FROM Room_Info
-INSERT INTO Room_Info VALUES ('P01', 'C0003', 'HD001');
+INSERT INTO Room_Info VALUES ('P01', 'C0001', 'HD001');
+
+DELETE Room_Info WHERE ID_Contract='HD002'
 INSERT INTO Room_Info VALUES ('P07', 'C0001', 'HD002');
 INSERT INTO Room_Info VALUES ('P07', 'C0002', 'HD002');
 
 ---------------------------------------Account-----------------------------------------
 SELECT * FROM Account;
 INSERT INTO Account VALUES('C0001','duc','duc123');
+
 INSERT INTO Account VALUES('C0002','phuoc','phuoc123');
 INSERT INTO Account VALUES('C0003','nhien','nhien123');
 
@@ -125,6 +127,8 @@ SELECT * FROM Room
 SELECT * FROM Client
 SELECT * FROM Contract
 SELECT * FROM Room_Info
+SELECT * FROM Bill
+SELECT * FROM Account
 
 DELETE Room_Info WHERE ID_Contract='HD005'
 DELETE Contract WHERE ID_Contract='HD009'

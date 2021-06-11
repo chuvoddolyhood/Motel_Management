@@ -36,7 +36,8 @@ public class ClientForm extends javax.swing.JFrame {
         //Set ID auto
         setID();
     }
-
+    String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890"; 
+            
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -251,7 +252,6 @@ public class ClientForm extends javax.swing.JFrame {
     private void loadInfoClient(){
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890"; 
             String query="SELECT * FROM Client;";
             Connection con=DriverManager.getConnection(dbURL);
             PreparedStatement ps=con.prepareStatement(query);
@@ -282,7 +282,6 @@ public class ClientForm extends javax.swing.JFrame {
         
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890"; 
             String query="SELECT MAX(ID_Client) AS MAX_ID FROM Client;";
             Connection connector=DriverManager.getConnection(dbURL);
             PreparedStatement ps=connector.prepareStatement(query);
@@ -341,7 +340,6 @@ public class ClientForm extends javax.swing.JFrame {
 
             try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
                 Connection con=DriverManager.getConnection(dbURL);
                 PreparedStatement ps=con.prepareStatement(query);
                 ps.setString(1, id);
@@ -374,7 +372,6 @@ public class ClientForm extends javax.swing.JFrame {
         if(confirm== JOptionPane.YES_OPTION){
             try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
                 String query="UPDATE Client SET Name_Client=?, CMND=?, Sex=?, DOB=?, Home_Town=?,Phone_Number=? WHERE ID_Client=?; ";
                 Connection con=DriverManager.getConnection(dbURL);
                 PreparedStatement ps=con.prepareStatement(query);
@@ -403,7 +400,6 @@ public class ClientForm extends javax.swing.JFrame {
         if(confirm== JOptionPane.YES_OPTION){
             try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
                 String query="DELETE Client WHERE ID_Client=? AND Name_Client=?;";
                 Connection con=DriverManager.getConnection(dbURL);
                 PreparedStatement ps=con.prepareStatement(query);

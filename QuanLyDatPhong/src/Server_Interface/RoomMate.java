@@ -10,7 +10,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,7 +28,7 @@ public class RoomMate extends javax.swing.JFrame {
         //Set form in center
         this.setLocationRelativeTo(null);
     }
-
+    String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -310,7 +309,7 @@ public class RoomMate extends javax.swing.JFrame {
     private void loadInfoRoommate(){
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
+            
             String query="SELECT RI.ID_Room, RI.ID_Contract, RI.ID_Client, C.Name_Client FROM Room_Info RI JOIN Client C ON RI.ID_Client=C.ID_Client WHERE ID_Contract=?";
             Connection con=DriverManager.getConnection(dbURL);
             PreparedStatement ps=con.prepareStatement(query);
@@ -337,7 +336,6 @@ public class RoomMate extends javax.swing.JFrame {
             String amountOfPeople = null;
             try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
                 String query="SELECT R.ID_Room, T.amount_people FROM Room R JOIN Contract C ON R.ID_Room=C.ID_Room JOIN TypeRoom T ON R.ID_Type=T.ID_Type WHERE ID_Contract=?";
                 Connection con=DriverManager.getConnection(dbURL);
                 PreparedStatement ps=con.prepareStatement(query);
@@ -362,7 +360,6 @@ public class RoomMate extends javax.swing.JFrame {
         int amountOfPeople = 0;
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
             String query="SELECT COUNT(*) AS amountOfPeople FROM Room_Info WHERE ID_Contract=?";
             Connection con=DriverManager.getConnection(dbURL);
             PreparedStatement ps=con.prepareStatement(query);
@@ -396,7 +393,6 @@ public class RoomMate extends javax.swing.JFrame {
 
                 try {
                     Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                    String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
                     Connection con=DriverManager.getConnection(dbURL);
                     PreparedStatement ps=con.prepareStatement(query);
                     ps.setString(1, idRoom);
@@ -420,7 +416,6 @@ public class RoomMate extends javax.swing.JFrame {
         {
             try{
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
                 String query="SELECT Name_Client FROM Client WHERE ID_Client=?";
                 Connection con=DriverManager.getConnection(dbURL);
                 PreparedStatement ps=con.prepareStatement(query);
@@ -449,7 +444,6 @@ public class RoomMate extends javax.swing.JFrame {
         if(confirm== JOptionPane.YES_OPTION){
             try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
                 String query="DELETE Room_Info WHERE ID_Client=?;";
                 Connection con=DriverManager.getConnection(dbURL);
                 PreparedStatement ps=con.prepareStatement(query);

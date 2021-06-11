@@ -34,7 +34,7 @@ public class OwnerForm extends javax.swing.JFrame {
         
         Load();
     }
-
+    String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -97,6 +97,7 @@ public class OwnerForm extends javax.swing.JFrame {
         txtUserName = new javax.swing.JTextField();
         Password = new javax.swing.JLabel();
         txtPassword = new javax.swing.JTextField();
+        btnRefreshTableAccount = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
@@ -134,6 +135,7 @@ public class OwnerForm extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         tblBill = new javax.swing.JTable();
         txtCurrentTime = new javax.swing.JTextField();
+        btnRefreshBill = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -456,23 +458,24 @@ public class OwnerForm extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(331, 331, 331)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(btnRefreshContract)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(331, 331, 331)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnRefreshContract)
+                .addGap(26, 26, 26))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(jLabel1)
-                .addGap(5, 5, 5)
-                .addComponent(btnRefreshContract)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(jLabel1)
+                        .addGap(40, 40, 40))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnRefreshContract)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(221, Short.MAX_VALUE))
         );
@@ -649,6 +652,13 @@ public class OwnerForm extends javax.swing.JFrame {
                 .addContainerGap(88, Short.MAX_VALUE))
         );
 
+        btnRefreshTableAccount.setText("Refresh");
+        btnRefreshTableAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshTableAccountActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
@@ -656,27 +666,34 @@ public class OwnerForm extends javax.swing.JFrame {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel14Layout.createSequentialGroup()
-                                .addGap(328, 328, 328)
-                                .addComponent(jLabel14))
-                            .addGroup(jPanel14Layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(30, 30, 30)
+                        .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 71, Short.MAX_VALUE))
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel14Layout.createSequentialGroup()
+                .addGap(328, 328, 328)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnRefreshTableAccount)
+                .addGap(17, 17, 17))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLabel14)
-                .addGap(18, 18, 18)
+                .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel14Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel14)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnRefreshTableAccount)
+                        .addGap(7, 7, 7)))
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel14Layout.createSequentialGroup()
@@ -960,6 +977,13 @@ public class OwnerForm extends javax.swing.JFrame {
 
         txtCurrentTime.setFocusable(false);
 
+        btnRefreshBill.setText("Refresh");
+        btnRefreshBill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshBillActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
@@ -976,9 +1000,11 @@ public class OwnerForm extends javax.swing.JFrame {
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
                         .addComponent(txtCurrentTime, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
                         .addComponent(jLabel15)
-                        .addGap(302, 302, 302))
+                        .addGap(191, 191, 191)
+                        .addComponent(btnRefreshBill)
+                        .addGap(17, 17, 17))
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addComponent(jScrollPane4)
                         .addContainerGap())))
@@ -989,7 +1015,8 @@ public class OwnerForm extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(txtCurrentTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCurrentTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRefreshBill))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel16Layout.createSequentialGroup()
@@ -1019,7 +1046,7 @@ public class OwnerForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 863, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1055,7 +1082,6 @@ public class OwnerForm extends javax.swing.JFrame {
     private void loadInfoRoom(){
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
             String query="SELECT R.ID_Room, R.ID_Type, R.Room_Title, C.Name_Client, Co.status FROM Contract Co JOIN Room R ON Co.ID_Room=R.ID_Room JOIN Client C ON Co.ID_representativeClient=C.ID_Client WHERE Co.status='live';";
             Connection con=DriverManager.getConnection(dbURL);
             PreparedStatement ps=con.prepareStatement(query);
@@ -1085,7 +1111,6 @@ public class OwnerForm extends javax.swing.JFrame {
         
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890"; 
             String query="SELECT MAX(ID_Contract) AS MAX_ID FROM Contract";
             Connection connector=DriverManager.getConnection(dbURL);
             PreparedStatement ps=connector.prepareStatement(query);
@@ -1097,7 +1122,7 @@ public class OwnerForm extends javax.swing.JFrame {
             numberID=0;
         }
         
-        ancestors=id.substring(0, 2); //C
+        ancestors="HD"; //C
         numberID=Integer.valueOf(id.substring(2, 5)); //number
         
         if(numberID<9) txtIDContract.setText(ancestors +"00"+ String.valueOf(numberID+1));
@@ -1155,7 +1180,6 @@ public class OwnerForm extends javax.swing.JFrame {
         String idContract=txtIDContract.getText();
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
             String query="DELETE Contract WHERE ID_Contract=?";
             Connection con=DriverManager.getConnection(dbURL);
             PreparedStatement ps=con.prepareStatement(query);
@@ -1172,7 +1196,6 @@ public class OwnerForm extends javax.swing.JFrame {
         String idContract=txtIDContract.getText();
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
             String query="DELETE Room_Info WHERE ID_Contract=?;";
             Connection con=DriverManager.getConnection(dbURL);
             PreparedStatement ps=con.prepareStatement(query);
@@ -1201,7 +1224,6 @@ public class OwnerForm extends javax.swing.JFrame {
     private void modifyContractDTB(String idOwner, String idRoom, String dateEnroll, String idContract){
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
             String query="UPDATE Contract SET ID_representativeClient=?, ID_Room=?, Date_Enroll=? WHERE ID_Contract=?;";
             Connection con=DriverManager.getConnection(dbURL);
             PreparedStatement ps=con.prepareStatement(query);
@@ -1221,7 +1243,6 @@ public class OwnerForm extends javax.swing.JFrame {
     private void modifyRoom_InfoDTB(String idOwner, String idRoom, String idContract){
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
             String query="UPDATE Room_Info SET ID_Room=?, ID_Client=? WHERE ID_Contract=?";
             Connection con=DriverManager.getConnection(dbURL);
             PreparedStatement ps=con.prepareStatement(query);
@@ -1281,7 +1302,6 @@ public class OwnerForm extends javax.swing.JFrame {
             
             try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
                 Connection con=DriverManager.getConnection(dbURL);
                 PreparedStatement ps=con.prepareStatement(query);
                 ps.setString(1, idContract);
@@ -1306,7 +1326,6 @@ public class OwnerForm extends javax.swing.JFrame {
             
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
             Connection con=DriverManager.getConnection(dbURL);
             PreparedStatement ps=con.prepareStatement(query);
             ps.setString(1, idRoom);
@@ -1340,7 +1359,6 @@ public class OwnerForm extends javax.swing.JFrame {
         {
             try{
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
                 String query="SELECT ID_Client FROM Client WHERE Phone_Number=?;";
                 Connection con=DriverManager.getConnection(dbURL);
                 PreparedStatement ps=con.prepareStatement(query);
@@ -1360,7 +1378,6 @@ public class OwnerForm extends javax.swing.JFrame {
     private void loadTableContractManagement(){
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
             String query="SELECT Co.ID_Contract, Ci.Name_Client, R.ID_Type, R.ID_Room, R.Room_Title, Co.Date_Enroll, Co.Date_End, Co.status \n" +
                         "FROM Contract Co JOIN Client Ci ON Co.ID_representativeClient=Ci.ID_Client\n" +
                         "JOIN Room R ON Co.ID_Room=R.ID_Room";
@@ -1391,7 +1408,6 @@ public class OwnerForm extends javax.swing.JFrame {
     private void loadTableAccountManagement(){
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
             String query="SELECT A.ID_Client, C.Name_Client, A.Username, A.Password FROM Account A JOIN Client C ON A.ID_Client=C.ID_Client";
             Connection con=DriverManager.getConnection(dbURL);
             PreparedStatement ps=con.prepareStatement(query);
@@ -1449,7 +1465,6 @@ public class OwnerForm extends javax.swing.JFrame {
 
             try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
                 Connection con=DriverManager.getConnection(dbURL);
                 PreparedStatement ps=con.prepareStatement(query);
                 ps.setString(1, idClient_Account);
@@ -1475,7 +1490,6 @@ public class OwnerForm extends javax.swing.JFrame {
         if(confirm== JOptionPane.YES_OPTION){
             try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
                 String query="UPDATE Account SET Username=?, Password=? WHERE ID_Client=?";
                 Connection con=DriverManager.getConnection(dbURL);
                 PreparedStatement ps=con.prepareStatement(query);
@@ -1500,7 +1514,6 @@ public class OwnerForm extends javax.swing.JFrame {
         if(confirm== JOptionPane.YES_OPTION){
             try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
                 String query="DELETE Account WHERE ID_Client=?";
                 Connection con=DriverManager.getConnection(dbURL);
                 PreparedStatement ps=con.prepareStatement(query);
@@ -1520,7 +1533,6 @@ public class OwnerForm extends javax.swing.JFrame {
         {
             try{
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
                 String query="SELECT Name_Client FROM Client WHERE ID_Client=?";
                 Connection con=DriverManager.getConnection(dbURL);
                 PreparedStatement ps=con.prepareStatement(query);
@@ -1545,7 +1557,6 @@ public class OwnerForm extends javax.swing.JFrame {
     private void loadTableBillManagement(){
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
             String query="SELECT B.ID_Bill, C.ID_Contract, C.ID_Room, C.status, C.Date_Enroll, B.Date_Note, B.Electric, B.Water, B.Internet,B.Money_Room,B.Cost\n" +
                             "FROM Bill B JOIN Contract C ON B.ID_Contract=C.ID_Contract";
             Connection con=DriverManager.getConnection(dbURL);
@@ -1587,7 +1598,6 @@ public class OwnerForm extends javax.swing.JFrame {
         String day=currentTime.substring(8, 10);
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
             String query="SELECT Co.ID_Contract,Co.ID_Room,Ci.Name_Client, Co.Date_Enroll\n" +
                             "FROM Contract Co JOIN Client Ci ON Co.ID_representativeClient=Ci.ID_Client\n" +
                             "WHERE Day(Date_Enroll)=?";
@@ -1621,7 +1631,6 @@ public class OwnerForm extends javax.swing.JFrame {
         
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890"; 
             String query="SELECT MAX(ID_Bill) AS MAX_ID FROM Bill";
             Connection connector=DriverManager.getConnection(dbURL);
             PreparedStatement ps=connector.prepareStatement(query);
@@ -1633,7 +1642,7 @@ public class OwnerForm extends javax.swing.JFrame {
             numberID=0;
         }
         
-        ancestors=id.substring(0, 1); //C
+        ancestors="B"; //B
         numberID=Integer.valueOf(id.substring(1, 5)); //number
         
         if(numberID<9) txtIDBill.setText(ancestors +"000"+ String.valueOf(numberID+1));
@@ -1644,6 +1653,7 @@ public class OwnerForm extends javax.swing.JFrame {
     
     private void btnCalculatorBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalculatorBillActionPerformed
         getIDContractFromIDRoom();
+        setIDBill();
         
         int electric=Integer.valueOf(txtElec.getText());
         int water=Integer.valueOf(txtWater.getText());
@@ -1675,7 +1685,6 @@ public class OwnerForm extends javax.swing.JFrame {
         try {
             String query="INSERT INTO Bill VALUES(?,?,?, ?, ?, ?, ?, ?);";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
             Connection con=DriverManager.getConnection(dbURL);
             PreparedStatement ps=con.prepareStatement(query);
                 ps.setString(1, idBill);
@@ -1695,15 +1704,16 @@ public class OwnerForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPayActionPerformed
 
     private void btnCancelContractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelContractActionPerformed
+        String currentTime=dateFormat.format(calendar.getTime());
         int confirm=JOptionPane.showConfirmDialog(rootPane, "Ban co chac muon HUY HOP DONG khong?","",JOptionPane.YES_NO_OPTION);
         if(confirm== JOptionPane.YES_OPTION){
             try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
-                String query="UPDATE Contract SET status='Expire' WHERE ID_Contract=?;";
+                String query="UPDATE Contract SET Date_End=?, status='Expire' WHERE ID_Contract=?;";
                 Connection con=DriverManager.getConnection(dbURL);
                 PreparedStatement ps=con.prepareStatement(query);
-                ps.setString(1, txtIDContract_Bill.getText());
+                ps.setString(1, currentTime);
+                ps.setString(2, txtIDContract_Bill.getText());
 
                 ps.executeUpdate();
             }catch(Exception ex){
@@ -1717,11 +1727,19 @@ public class OwnerForm extends javax.swing.JFrame {
         loadInfoRoom();
     }//GEN-LAST:event_btnRefreshTableRoomOrderActionPerformed
 
+    private void btnRefreshTableAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshTableAccountActionPerformed
+        loadTableAccountManagement();
+    }//GEN-LAST:event_btnRefreshTableAccountActionPerformed
+
+    private void btnRefreshBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshBillActionPerformed
+        loadTableNotiInBill();
+        loadTableBillManagement();
+    }//GEN-LAST:event_btnRefreshBillActionPerformed
+
     
     private void getIDContractFromIDRoom(){
         try{
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
                 String query="SELECT C.ID_Contract FROM Room R JOIN Contract C ON R.ID_Room=C.ID_Room WHERE R.ID_Room=? AND C.status='Live'";
                 Connection con=DriverManager.getConnection(dbURL);
                 PreparedStatement ps=con.prepareStatement(query);
@@ -1740,7 +1758,6 @@ public class OwnerForm extends javax.swing.JFrame {
         int moneyRoom=0;
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
             String query="SELECT T.Money FROM Room R JOIN TypeRoom T ON R.ID_Type=T.ID_Type WHERE R.ID_Room=?;";
             Connection con=DriverManager.getConnection(dbURL);
             PreparedStatement ps=con.prepareStatement(query);
@@ -1803,7 +1820,9 @@ public class OwnerForm extends javax.swing.JFrame {
     private javax.swing.JButton btnModify;
     private javax.swing.JButton btnModifyAccount;
     private javax.swing.JButton btnPay;
+    private javax.swing.JButton btnRefreshBill;
     private javax.swing.JButton btnRefreshContract;
+    private javax.swing.JButton btnRefreshTableAccount;
     private javax.swing.JButton btnRefreshTableRoomOrder;
     private javax.swing.JButton btnRegisterRoomMate;
     private javax.swing.JButton btnWarn;

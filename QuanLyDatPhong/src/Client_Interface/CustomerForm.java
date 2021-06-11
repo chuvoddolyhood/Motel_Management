@@ -5,7 +5,6 @@
  */
 package Client_Interface;
 
-import Chat_Client.LoginForm;
 import Chat_Client.MainForm;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,7 +15,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *
@@ -38,7 +36,7 @@ public class CustomerForm extends javax.swing.JFrame {
         
         Load();
     }
-
+    String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -384,7 +382,6 @@ public class CustomerForm extends javax.swing.JFrame {
         
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
             String query="SELECT Date_Note, Electric, Water, Money_Room, Cost FROM Bill WHERE ID_Contract=?";
             Connection con=DriverManager.getConnection(dbURL);
             PreparedStatement ps=con.prepareStatement(query);
@@ -410,7 +407,6 @@ public class CustomerForm extends javax.swing.JFrame {
     private String getIDContract(String IDRoom){
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
             String query="SELECT ID_Contract FROM Contract WHERE ID_Room=?";
             Connection con=DriverManager.getConnection(dbURL);
             PreparedStatement ps=con.prepareStatement(query);
@@ -432,7 +428,6 @@ public class CustomerForm extends javax.swing.JFrame {
         
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
             String query="SELECT ID_Room FROM Room_Info WHERE ID_Client=?";
             Connection con=DriverManager.getConnection(dbURL);
             PreparedStatement ps=con.prepareStatement(query);
@@ -456,7 +451,6 @@ public class CustomerForm extends javax.swing.JFrame {
             try{
                 System.out.println(IDClient);
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
             String query="SELECT * FROM Account WHERE ID_Client=?";
             Connection con=DriverManager.getConnection(dbURL);
             PreparedStatement ps=con.prepareStatement(query);
@@ -535,7 +529,6 @@ public class CustomerForm extends javax.swing.JFrame {
         String currentTime=dateFormat.format(cal.getTime());
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
             String query="SELECT MONTH(Date_Note) AS month_note, YEAR(Date_Note) AS year_note\n" +
                             "FROM Bill \n" +
                             "WHERE ID_Contract=? AND ID_Bill=(SELECT MAX(ID_Bill) FROM Bill WHERE ID_Contract=?)";

@@ -27,7 +27,7 @@ public class LoginClientForm extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
     
-    String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=ChuhoodGym; user=test; password=1234567890"; 
+    String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890"; 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -173,7 +173,6 @@ public class LoginClientForm extends javax.swing.JFrame {
             try{
                 String queryFindPass="SELECT * FROM Account WHERE Username=? and Password = ?;";
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890"; 
                 Connection con=DriverManager.getConnection(dbURL);
                 PreparedStatement ps=con.prepareStatement(queryFindPass);
                 ps.setString(1, UName);
