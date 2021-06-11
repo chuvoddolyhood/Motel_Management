@@ -1033,7 +1033,7 @@ public class OwnerForm extends javax.swing.JFrame {
                     rs.getString(3),
                     rs.getString(4),
                     rs.getString(5),
-                }); 
+                });
             }
             
         }catch(Exception ex){

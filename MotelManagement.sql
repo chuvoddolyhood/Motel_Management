@@ -196,7 +196,7 @@ DELETE Account WHERE ID_Client='C0003'
 SELECT B.ID_Bill, C.ID_Contract, C.ID_Room, C.status, C.Date_Enroll, B.Date_Note, B.Electric, B.Water, B.Internet,B.Money_Room,B.Cost
 FROM Bill B JOIN Contract C ON B.ID_Contract=C.ID_Contract
 
-SELECT * FROM Bill
+SELECT MAX(ID_Bill) AS MAX_ID FROM Bill
 
 SELECT * FROM Contract
 

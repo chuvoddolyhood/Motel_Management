@@ -5,7 +5,6 @@
  */
 package controller;
 
-import Interface.CustomerForm;
 import Interface.LoginForm;
 import Interface.OwnerForm;
 import javax.swing.JOptionPane;

@@ -3,9 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Interface;
+package Client;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 /**
@@ -22,6 +27,8 @@ public class CustomerForm extends javax.swing.JFrame {
         
         //Set form in center
         this.setLocationRelativeTo(null);
+        
+        Load();
     }
 
     /**
@@ -34,19 +41,11 @@ public class CustomerForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel10 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tbListService = new javax.swing.JTable();
-        btnWarn1 = new javax.swing.JButton();
-        btnWarn2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel23 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        tbService = new javax.swing.JTable();
+        tblService = new javax.swing.JTable();
         jPanel25 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
@@ -74,145 +73,20 @@ public class CustomerForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
-        jLabel2.setText("Yêu Cầu Dịch Vụ");
-
-        jPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        tbListService.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "ID_Service", "Service_Title", "Price", "Status"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane2.setViewportView(tbListService);
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        btnWarn1.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        btnWarn1.setText("Yêu cầu hủy dịch vụ");
-        btnWarn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnWarn1ActionPerformed(evt);
-            }
-        });
-
-        btnWarn2.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        btnWarn2.setText("Yêu cầu dịch vụ");
-        btnWarn2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnWarn2ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnWarn2)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnWarn1)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(248, 248, 248))))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnWarn1)
-                    .addComponent(btnWarn2))
-                .addContainerGap(33, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 715, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 519, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-
-        jTabbedPane1.addTab("Yêu Cầu Dịch Vụ", jPanel1);
-
         jPanel23.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        tbService.setModel(new javax.swing.table.DefaultTableModel(
+        tblService.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "ID_Service", "Service_Title", "Price"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
-        });
-        tbService.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbServiceMouseClicked(evt);
-            }
-        });
-        jScrollPane6.setViewportView(tbService);
+        ));
+        jScrollPane6.setViewportView(tblService);
 
         javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
         jPanel23.setLayout(jPanel23Layout);
@@ -499,13 +373,38 @@ public class CustomerForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tbServiceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbServiceMouseClicked
-        int Row = tbListService.getSelectedRow();
-        TableModel model = tbListService.getModel();
-
-        int ID_Service = Integer.valueOf(String.valueOf(model.getValueAt(Row, 0)));
-    }//GEN-LAST:event_tbServiceMouseClicked
-
+    private void Load(){
+        loadtblService();
+    }
+    
+    String idContract;
+    void loadtblService(){
+        
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
+            String query="SELECT Date_Note, Electric, Water, Money_Room, Cost FROM Bill WHERE ID_Contract=?";
+            Connection con=DriverManager.getConnection(dbURL);
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setString(1, idContract);
+            ResultSet rs = ps.executeQuery();
+            DefaultTableModel m=new DefaultTableModel(new Object[]{"Date Note", "Elcetric","Water", "Money Room", "Cost"}, 0);
+               tblService.setModel(m);
+            while (rs.next()) {
+                ((DefaultTableModel)tblService.getModel()).addRow(new Object[]{
+                    rs.getDate(1),
+                    rs.getInt(2),
+                    rs.getInt(3),
+                    rs.getInt(4),
+                    rs.getInt(5)
+                }); 
+            }
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+    }
+    
+    
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
 
         //Update Status của ID_Room đã trả tiền tháng này
@@ -548,14 +447,6 @@ public class CustomerForm extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnCancelTotalActionPerformed
 
-    private void btnWarn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWarn1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnWarn1ActionPerformed
-
-    private void btnWarn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWarn2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnWarn2ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -596,13 +487,10 @@ public class CustomerForm extends javax.swing.JFrame {
     private javax.swing.JButton btnCheck;
     private javax.swing.JButton btnLoadTotal;
     private javax.swing.JButton btnPay;
-    private javax.swing.JButton btnWarn1;
-    private javax.swing.JButton btnWarn2;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -610,28 +498,14 @@ public class CustomerForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel19;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel20;
-    private javax.swing.JPanel jPanel21;
-    private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable tbCost;
-    private javax.swing.JTable tbCost1;
-    private javax.swing.JTable tbCost2;
-    private javax.swing.JTable tbListService;
-    private javax.swing.JTable tbService;
+    private javax.swing.JTable tblService;
     private javax.swing.JTextField txtElec;
     private javax.swing.JTextField txtElecPrice;
     private javax.swing.JTextField txtInterPrice;
