@@ -96,7 +96,7 @@ INSERT INTO Contract VALUES('HD002','C0001','P07','Jun 8 2021',null,'live');
 ------------------------------Bill------------------------------
 SELECT * FROM Bill;
 INSERT INTO Bill VALUES('B0001','HD001','Jul 5 2021', 12, 8, 1, 800000, 937000);
-INSERT INTO Bill VALUES('B0002','HD002','Jul 8 2021', 20, 13, 1, 1000000, 1209000);
+INSERT INTO Bill VALUES('B0002','HD002','May 8 2021', 20, 13, 1, 1000000, 1209000);
 
 ------------------------------Room Info------------------------------
 SELECT * FROM Room_Info
@@ -212,3 +212,34 @@ SELECT R.ID_Room, R.ID_Type, R.Room_Title, C.Name_Client, Co.status
 FROM Contract Co JOIN Room R ON Co.ID_Room=R.ID_Room 
 				JOIN Client C ON Co.ID_representativeClient=C.ID_Client
 WHERE Co.status='live'
+
+
+
+SELECT Date_Note, Electric, Water, Money_Room, Cost FROM Bill WHERE ID_Contract='HD001'
+SELECT * FROM Contract
+SELECT * FROM Room_Info
+
+DELETE Contract WHERE Date_Enroll='2021-06-10'
+
+DELETE Contract WHERE Date_Enroll='2021-06-10'
+
+SELECT * FROM Account
+SELECT * FROM Contract
+SELECT Password FROM Account WHERE Username='khanh';
+
+SELECT Password FROM Account WHERE Username='duc';
+
+SELECT ID_Contract 
+FROM Contract WHERE ID_representativeClient='C0001' AND status='live';
+
+SELECT ID_Room FROM Room_Info WHERE ID_Client='C0002'
+
+SELECT * FROM Bill 
+
+SELECT MONTH(Date_Note) AS month_note, YEAR(Date_Note) AS year_note
+FROM Bill 
+WHERE ID_Contract='HD002' AND ID_Bill=(SELECT MAX(ID_Bill) FROM Bill WHERE ID_Contract='HD002')
+
+
+
+

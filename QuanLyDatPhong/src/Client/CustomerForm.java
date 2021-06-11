@@ -9,6 +9,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -22,7 +25,10 @@ public class CustomerForm extends javax.swing.JFrame {
     /**
      * Creates new form CustomerForm
      */
-    public CustomerForm() {
+    
+    static String IDClient;
+    public CustomerForm(String idclient) {
+        this.IDClient = idclient;
         initComponents();
         
         //Set form in center
@@ -50,11 +56,9 @@ public class CustomerForm extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
         txtElecPrice = new javax.swing.JTextField();
         txtWaterPrice = new javax.swing.JTextField();
         txtInterPrice = new javax.swing.JTextField();
-        txtServicePrice = new javax.swing.JTextField();
         txtTotal = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         btnPay = new javax.swing.JButton();
@@ -116,9 +120,6 @@ public class CustomerForm extends javax.swing.JFrame {
         jLabel20.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         jLabel20.setText("Internet:");
 
-        jLabel21.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        jLabel21.setText("Dịch vụ:");
-
         txtElecPrice.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         txtElecPrice.setFocusable(false);
         txtElecPrice.setPreferredSize(new java.awt.Dimension(59, 25));
@@ -128,10 +129,8 @@ public class CustomerForm extends javax.swing.JFrame {
         txtWaterPrice.setPreferredSize(new java.awt.Dimension(59, 25));
 
         txtInterPrice.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        txtInterPrice.setText("25000");
         txtInterPrice.setPreferredSize(new java.awt.Dimension(59, 25));
-
-        txtServicePrice.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        txtServicePrice.setPreferredSize(new java.awt.Dimension(59, 25));
 
         txtTotal.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         txtTotal.setPreferredSize(new java.awt.Dimension(59, 25));
@@ -190,10 +189,6 @@ public class CustomerForm extends javax.swing.JFrame {
                         .addComponent(jLabel20)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                         .addComponent(txtInterPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel25Layout.createSequentialGroup()
-                        .addComponent(jLabel21)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtServicePrice, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel25Layout.createSequentialGroup()
                         .addComponent(jLabel22)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -224,11 +219,7 @@ public class CustomerForm extends javax.swing.JFrame {
                 .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
                     .addComponent(txtInterPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21)
-                    .addComponent(txtServicePrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addGap(76, 76, 76)
                 .addGroup(jPanel25Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
                     .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -245,6 +236,11 @@ public class CustomerForm extends javax.swing.JFrame {
 
         btnCheck.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btnCheck.setText("Kiểm tra");
+        btnCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCheckActionPerformed(evt);
+            }
+        });
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         jLabel24.setText("Điện:");
@@ -377,8 +373,12 @@ public class CustomerForm extends javax.swing.JFrame {
         loadtblService();
     }
     
-    String idContract;
     void loadtblService(){
+        String IDRoom=null, IDContract=null;
+        IDRoom = getIDRoom(IDClient);
+        
+        IDContract = getIDContract(IDRoom);
+        
         
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -386,7 +386,7 @@ public class CustomerForm extends javax.swing.JFrame {
             String query="SELECT Date_Note, Electric, Water, Money_Room, Cost FROM Bill WHERE ID_Contract=?";
             Connection con=DriverManager.getConnection(dbURL);
             PreparedStatement ps=con.prepareStatement(query);
-            ps.setString(1, idContract);
+            ps.setString(1, IDContract);
             ResultSet rs = ps.executeQuery();
             DefaultTableModel m=new DefaultTableModel(new Object[]{"Date Note", "Elcetric","Water", "Money Room", "Cost"}, 0);
                tblService.setModel(m);
@@ -404,6 +404,46 @@ public class CustomerForm extends javax.swing.JFrame {
         }
     }
     
+    String IDContract=null;
+    private String getIDContract(String IDRoom){
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
+            String query="SELECT ID_Contract FROM Contract WHERE ID_Room=?";
+            Connection con=DriverManager.getConnection(dbURL);
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setString(1, IDRoom);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                IDContract = rs.getString("ID_Contract");
+            }
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+        
+        return IDContract;
+    }
+    
+    private String getIDRoom(String IDClient){
+        String IDRoom = null;
+        
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
+            String query="SELECT ID_Room FROM Room_Info WHERE ID_Client=?";
+            Connection con=DriverManager.getConnection(dbURL);
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setString(1, IDClient);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                IDRoom = rs.getString("ID_Room");
+            }
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+        
+        return IDRoom;
+    }
     
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
 
@@ -412,40 +452,85 @@ public class CustomerForm extends javax.swing.JFrame {
 
     private void btnLoadTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadTotalActionPerformed
         boolean check=false;
-        int ElecPrice = Integer.valueOf(txtElec.getText()) * 3000;
-        int WaterPrice = Integer.valueOf(txtWater.getText()) * 7000;
-        int InterPrice = Integer.valueOf(txtInterPrice.getText());
-        int ServicePrice = Integer.valueOf(txtServicePrice.getText());
+        String electric=txtElec.getText();
+        String water=txtWater.getText();
+        
+        int ElecPrice = 0;
+        int WaterPrice = 0;
+        int InterPrice = 0;
         double Total;
-
-        txtElecPrice.setText(String.valueOf(ElecPrice));
-        txtWaterPrice.setText(String.valueOf(WaterPrice));
-
-        if(ElecPrice<=0)
-        JOptionPane.showMessageDialog(this, "Vui lòng nhập số điện > 0");
-        else if(WaterPrice<=0)
-        JOptionPane.showMessageDialog(this, "Vui lòng nhập số nước > 0");
-        else if(InterPrice<0)
-        JOptionPane.showMessageDialog(this, "Vui lòng nhập tiền mạng > 0, 0 nếu không sử dụng mạng");
-        else if(ServicePrice<0)
-        JOptionPane.showMessageDialog(this, "Vui lòng nhập tiền dịch vụ > 0, 0 nếu không sử dụng dịch vụ");
-        else{
-            Total = ElecPrice + WaterPrice + InterPrice + ServicePrice;
-            txtTotal.setText(String.valueOf(Total)+"VNĐ");
-            btnPay.setEnabled(!check);
-            txtElecPrice.setEnabled(check);
-            txtWaterPrice.setEnabled(check);
-            txtInterPrice.setEnabled(check);
-            txtServicePrice.setEnabled(check);
-            txtElec.setEnabled(check);
-            txtWater.setEnabled(check);
-
+        if(!electric.equals("") || !water.equals("")){
+            ElecPrice = Integer.valueOf(txtElec.getText()) * 3000;
+            WaterPrice = Integer.valueOf(txtWater.getText()) * 7000;
+            InterPrice = Integer.valueOf(txtInterPrice.getText());
+            
+            txtElecPrice.setText(String.valueOf(ElecPrice));
+            txtWaterPrice.setText(String.valueOf(WaterPrice));
+            
+            if(ElecPrice<=0)
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập số điện > 0");
+            else if(WaterPrice<=0)
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập số nước > 0");
+            else if(InterPrice<0)
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập tiền mạng > 0, 0 nếu không sử dụng mạng");
+            else{
+                Total = ElecPrice + WaterPrice + InterPrice;
+                txtTotal.setText(String.valueOf(Total)+"VNĐ");
+                btnPay.setEnabled(!check);
+                txtElecPrice.setEnabled(check);
+                txtWaterPrice.setEnabled(check);
+                txtInterPrice.setEnabled(check);
+                txtElec.setEnabled(check);
+                txtWater.setEnabled(check);
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Vui long nhap so dien va so nuoc");
         }
     }//GEN-LAST:event_btnLoadTotalActionPerformed
 
     private void btnCancelTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelTotalActionPerformed
-
+        btnPay.setEnabled(false);
+        txtElecPrice.setEnabled(true);
+        txtWaterPrice.setEnabled(true);
+        txtInterPrice.setEnabled(true);
+        txtElec.setEnabled(true);
+        txtWater.setEnabled(true);
     }//GEN-LAST:event_btnCancelTotalActionPerformed
+
+    private void btnCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckActionPerformed
+        String month = null;
+        String year = null;
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        String currentTime=dateFormat.format(cal.getTime());
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String dbURL="jdbc:sqlserver://MSI\\SQLEXPRESS:1433; databaseName=Motel; user=test; password=1234567890";
+            String query="SELECT MONTH(Date_Note) AS month_note, YEAR(Date_Note) AS year_note\n" +
+                            "FROM Bill \n" +
+                            "WHERE ID_Contract=? AND ID_Bill=(SELECT MAX(ID_Bill) FROM Bill WHERE ID_Contract=?)";
+            Connection con=DriverManager.getConnection(dbURL);
+            PreparedStatement ps=con.prepareStatement(query);
+            ps.setString(1, IDContract);
+            ps.setString(2, IDContract);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                month = rs.getString("month_note");
+                year = rs.getString("year_note");
+            }
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+        
+        int currentYear=Integer.valueOf(currentTime.substring(0, 4));
+        int currentMonth=Integer.valueOf(currentTime.substring(5, 7));
+        
+        if(currentYear==Integer.valueOf(year) && currentMonth==Integer.valueOf(month)){
+            JOptionPane.showMessageDialog(rootPane, "Da dong tien");
+        }
+        else JOptionPane.showMessageDialog(rootPane, "Chua dong tien thang "+currentMonth+"/"+currentYear);
+    }//GEN-LAST:event_btnCheckActionPerformed
 
     /**
      * @param args the command line arguments
@@ -477,7 +562,7 @@ public class CustomerForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CustomerForm().setVisible(true);
+                new CustomerForm(IDClient).setVisible(true);
             }
         });
     }
@@ -492,7 +577,6 @@ public class CustomerForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
@@ -509,7 +593,6 @@ public class CustomerForm extends javax.swing.JFrame {
     private javax.swing.JTextField txtElec;
     private javax.swing.JTextField txtElecPrice;
     private javax.swing.JTextField txtInterPrice;
-    private javax.swing.JTextField txtServicePrice;
     private javax.swing.JTextField txtTotal;
     private javax.swing.JTextField txtWater;
     private javax.swing.JTextField txtWaterPrice;

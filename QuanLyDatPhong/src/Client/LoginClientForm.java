@@ -160,7 +160,7 @@ public class LoginClientForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
-    String UName, UPass;
+    String UName, UPass, IDClient;
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         
         if(txtUserName.equals(""))
@@ -182,7 +182,8 @@ public class LoginClientForm extends javax.swing.JFrame {
                 ResultSet rs=ps.executeQuery();
 
                 if(rs.next()){
-                    CustomerForm cf = new CustomerForm();
+                    IDClient = rs.getString("ID_Client");
+                    CustomerForm cf = new CustomerForm(IDClient);
                     cf.setVisible(true);
                     this.setVisible(false);
                 }
