@@ -5,8 +5,8 @@
  */
 package controller;
 
-import Interface.LoginForm;
-import Interface.OwnerForm;
+import Server_Interface.LoginForm;
+import Server_Interface.OwnerForm;
 import javax.swing.JOptionPane;
 
 /**
