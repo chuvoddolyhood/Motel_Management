@@ -15,10 +15,7 @@ import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Tran Nhan Nghia
- */
+
 public class ClientForm extends javax.swing.JFrame {
 
     /**

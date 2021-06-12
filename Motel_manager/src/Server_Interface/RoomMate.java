@@ -13,10 +13,7 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Tran Nhan Nghia
- */
+
 public class RoomMate extends javax.swing.JFrame {
 
     /**

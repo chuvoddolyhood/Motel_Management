@@ -11,10 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Tran Nhan Nghia
- */
+
 public class LoginClientForm extends javax.swing.JFrame {
 
     /**

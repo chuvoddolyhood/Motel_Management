@@ -10,10 +10,6 @@ import Server_Interface.LoginForm;
 import Server_Interface.OwnerForm;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Tran Nhan Nghia
- */
 public class LoginCtrl extends LoginForm{
     private String name;
     private String pass;

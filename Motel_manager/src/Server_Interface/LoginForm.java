@@ -8,10 +8,7 @@ package Server_Interface;
 import Chat_server.MainForm;
 import controller.LoginCtrl;
 
-/**
- *
- * @author ADMIN
- */
+
 public class LoginForm extends javax.swing.JFrame {
 
     /**
